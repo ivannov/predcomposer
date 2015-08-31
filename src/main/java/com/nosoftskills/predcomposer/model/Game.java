@@ -7,18 +7,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "getAllFutureGamesForCompetition",
+                query = "SELECT g FROM Game g WHERE g.competition = :competition AND g.gameTime >= :after ORDER BY g.gameTime")
+})
 public class Game implements Serializable {
 
-	@Id
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM, HH:mm");
+
+    @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
@@ -113,6 +123,10 @@ public class Game implements Serializable {
 
     public LocalDateTime getGameTime() {
         return gameTime;
+    }
+
+    public String getGameTimeFormatted() {
+        return gameTime.format(DATE_TIME_FORMATTER);
     }
 
     public void setGameTime(LocalDateTime gameTime) {

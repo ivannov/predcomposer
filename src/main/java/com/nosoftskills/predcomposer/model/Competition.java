@@ -34,6 +34,10 @@ public class Competition implements Serializable {
     public Competition() {
     }
 
+    public Competition(String name) {
+        this(name, "");
+    }
+
     public Competition(String name, String description) {
         this.name = name;
         this.description = description;
