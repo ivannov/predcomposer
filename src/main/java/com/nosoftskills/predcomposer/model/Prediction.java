@@ -5,11 +5,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Version;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "getPredictionsForUserAndCompetition", query = "SELECT p FROM Prediction p WHERE p.byUser = :user AND p.forGame.competition = :competition")
+})
 public class Prediction implements Serializable {
 
 	@Id

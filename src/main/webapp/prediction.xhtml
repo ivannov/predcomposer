@@ -7,7 +7,30 @@
 </h:head>
 
 <h:body>
-<h1>Your prediction goes here</h1>
+    <h4><h:outputText value="Hello, #{userContext.loggedUser.firstName}"/></h4>
+    <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
+    <p/>
+    <h1>Give a prediction</h1>
+    <h:form>
+        <table>
+            <tr>
+                <td><h:outputText value="#{prediction.homeTeam}"/></td>
+                <td>-</td>
+                <td><h:outputText value="#{prediction.awayTeam}"/></td>
+            </tr>
+            <tr>
+                <td><h:inputText value="#{prediction.homeTeamPredictedGoals}"/></td>
+                <td>:</td>
+                <td><h:inputText value="#{prediction.awayTeamPredictedGoals}"/></td>
+            </tr>
+            <tr>
+                <td/><td/>
+                <td>
+                    <h:commandButton value="Submit" action="#{prediction.submitPrediction}"/>
+                </td>
+            </tr>
+        </table>
+    </h:form>
 </h:body>
 
 </html>
