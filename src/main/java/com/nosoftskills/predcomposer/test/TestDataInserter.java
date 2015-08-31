@@ -2,6 +2,7 @@ package com.nosoftskills.predcomposer.test;
 
 import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
+import com.nosoftskills.predcomposer.model.User;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -24,6 +25,8 @@ public class TestDataInserter {
 
     @PostConstruct
     public void insertTestData() {
+        entityManager.persist(new User("ivan", "ivan", "ivan@example.com", "Ivan", "Ivanov"));
+
         entityManager.persist(DEFAULT_COMPETITION);
 
         entityManager.persist(new Game(DEFAULT_COMPETITION, "Manchester United", "Club Brugge", "3:1", LocalDateTime.of(2015, 8, 18, 21, 45), true));

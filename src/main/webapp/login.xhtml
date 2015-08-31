@@ -1,0 +1,25 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Predictions composer</title>
+</h:head>
+
+<h:body>
+    <h:form>
+        <h3>Login</h3>
+        <h:outputText value="User name"/>
+        <h:inputText value="#{login.userName}" id="userName"/>
+        <br/><br/>
+        <h:outputText value="Password"/>
+        <h:inputSecret value="#{login.password}" id="password"/>
+        <br/><br/>
+        <h:commandButton value="Login" action="#{login.login}"/>
+    </h:form>
+</h:body>
+
+</html>

@@ -11,6 +11,9 @@
 </h:head>
 
 <h:body>
+    <h4><h:outputText value="Hello, #{userContext.loggedUser.firstName}"/></h4>
+    <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
+    <p/>
     <h1>The list of all future games</h1>
     <h:dataTable value="#{game.getAllGamesForCurrentCompetition()}" var="g">
         <h:column>

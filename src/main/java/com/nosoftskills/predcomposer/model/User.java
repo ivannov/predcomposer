@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import java.io.Serializable;
@@ -13,6 +15,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Users")
+@NamedQueries({
+        @NamedQuery(name = "findUserByNameAndPassword", query = "SELECT u FROM User u WHERE u.userName = :userName AND u.password = :password")
+})
 public class User implements Serializable {
 
 	@Id
@@ -47,7 +52,7 @@ public class User implements Serializable {
 
     public User(String userName, String password, String email, String firstName,
             String lastName) {
-        this(userName, password, email, null, null, null);
+        this(userName, password, email, firstName, lastName, null);
     }
 
     public User(String userName, String password, String email, String firstName,
