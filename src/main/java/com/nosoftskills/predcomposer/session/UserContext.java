@@ -1,4 +1,4 @@
-package com.nosoftskills.predcomposer.user;
+package com.nosoftskills.predcomposer.session;
 
 import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.User;

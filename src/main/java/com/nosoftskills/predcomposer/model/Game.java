@@ -14,19 +14,21 @@ import javax.persistence.Version;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "getAllFutureGamesForCompetition",
-                query = "SELECT g FROM Game g WHERE g.competition = :competition AND g.gameTime >= :after ORDER BY g.gameTime")
+        @NamedQuery(name = "getFutureGamesForCompetition",
+                query = "SELECT g FROM Game g WHERE g.competition = :competition AND g.gameTime >= :after ORDER BY g.gameTime"),
+        @NamedQuery(name = "getCompletedGamesForCompetition",
+                query = "SELECT g FROM Game g WHERE g.competition = :competition AND g.result IS NOT NULL")
 })
 public class Game implements Serializable {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM, HH:mm");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
+            "dd MMM, HH:mm");
 
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

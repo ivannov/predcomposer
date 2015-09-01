@@ -1,11 +1,6 @@
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <title>Predictions composer</title>
@@ -15,8 +10,8 @@
     <h4><h:outputText value="Hello, #{userContext.loggedUser.firstName}"/></h4>
     <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
     <p/>
-    <h1>The list of all future games</h1>
-    <h:dataTable value="#{game.futureGamesForCurrentCompetition}" var="g">
+    <h1>Completed games</h1>
+    <h:dataTable value="#{game.completedGamesForCurrentCompetition}" var="g">
         <h:column>
             <f:facet name="header">Home team</f:facet>
             <h:outputText value="#{g.homeTeam}"/>
@@ -26,18 +21,17 @@
             <h:outputText value="#{g.awayTeam}"/>
         </h:column>
         <h:column>
+            <f:facet name="header">Result</f:facet>
+            <h:form><h:commandLink value="#{g.result}" action="#{userPredictions.getGamePredictions(g)}"/></h:form>
+        </h:column>
+        <h:column>
             <f:facet name="header">Game time</f:facet>
             <h:outputText value="#{g.gameTimeFormatted}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Prediction</f:facet>
-            <c:set var="currentPrediction" value="#{game.currentUserPredictions[g.id]}"/>
-            <h:form>
-                <h:commandLink value="#{currentPrediction == null ? 'Add' : currentPrediction.predictedResult}"
-                        action="#{prediction.requestPrediction(g, currentPrediction)}"/>
-            </h:form>
+            <h:outputText value="#{game.currentUserPredictions[g.id].predictedResult}"/>
         </h:column>
-
     </h:dataTable>
 </h:body>
 

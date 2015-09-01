@@ -2,7 +2,7 @@ package com.nosoftskills.predcomposer.prediction;
 
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.model.Prediction;
-import com.nosoftskills.predcomposer.user.UserContext;
+import com.nosoftskills.predcomposer.session.UserContext;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;

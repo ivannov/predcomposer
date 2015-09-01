@@ -1,6 +1,7 @@
 package com.nosoftskills.predcomposer.user;
 
 import com.nosoftskills.predcomposer.model.User;
+import com.nosoftskills.predcomposer.session.UserContext;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;

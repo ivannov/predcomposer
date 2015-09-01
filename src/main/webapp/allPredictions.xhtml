@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Predictions composer</title>
+</h:head>
+
+<h:body>
+    <h4><h:outputText value="Hello, #{userContext.loggedUser.firstName}"/></h4>
+    <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
+    <p/>
+    <h1>Predictions for <h:outputText value="#{userPredictions.game.homeTeam} - #{userPredictions.game.awayTeam} #{userPredictions.game.result}"/></h1>
+    <h:dataTable value="#{userPredictions.userPredictions}" var="p">
+        <h:column>
+            <f:facet name="header">User</f:facet>
+            <h:outputText value="#{p.byUser.userName}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Prediction</f:facet>
+            <h:outputText value="#{p.predictedResult}"/>
+        </h:column>
+    </h:dataTable>
+</h:body>
+
+</html>

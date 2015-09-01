@@ -28,18 +28,24 @@ public class TestDataInserter {
     public void insertTestData() {
         User user1 = new User("ivan", "ivan", "ivan@example.com", "Ivan", "Ivanov");
         entityManager.persist(user1);
+        User user2 = new User("koko", "koko", "koko@example.com", "Koko", "Stefanov");
+        entityManager.persist(user2);
 
         entityManager.persist(DEFAULT_COMPETITION);
 
         entityManager.persist(new Game(DEFAULT_COMPETITION, "Manchester United", "Club Brugge", "3:1", LocalDateTime.of(2015, 8, 18, 21, 45), true));
-        entityManager.persist(new Game(DEFAULT_COMPETITION, "Club Brugge", "Manchester United", "0:4", LocalDateTime.of(2015, 8, 26, 21, 45), true));
-        Game game1 = new Game(DEFAULT_COMPETITION, "Paris SG", "Malmo",
-                LocalDateTime.of(2015, 9, 15, 21, 45));
+        Game game1 = new Game(DEFAULT_COMPETITION, "Club Brugge", "Manchester United", "0:4",
+                LocalDateTime.of(2015, 8, 26, 21, 45), true);
         entityManager.persist(game1);
+        Game game2 = new Game(DEFAULT_COMPETITION, "Paris SG", "Malmo",
+                LocalDateTime.of(2015, 9, 15, 21, 45));
+        entityManager.persist(game2);
         entityManager.persist(new Game(DEFAULT_COMPETITION, "Real Madrid", "Shakhtar Donetsk", LocalDateTime.of(2015, 9, 15, 21, 45)));
         entityManager.persist(new Game(DEFAULT_COMPETITION, "Leverkusen", "BATE", LocalDateTime.of(2015, 9, 16, 21, 45)));
         entityManager.persist(new Game(DEFAULT_COMPETITION, "Roma", "Barcelona", LocalDateTime.of(2015, 9, 16, 21, 45)));
 
-        entityManager.persist(new Prediction(user1, game1, "2:0"));
+        entityManager.persist(new Prediction(user1, game1, "0:0"));
+        entityManager.persist(new Prediction(user2, game1, "0:2"));
+        entityManager.persist(new Prediction(user1, game2, "2:0"));
     }
 }

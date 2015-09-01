@@ -1,4 +1,6 @@
-package com.nosoftskills.predcomposer.user;
+package com.nosoftskills.predcomposer.web;
+
+import com.nosoftskills.predcomposer.session.UserContext;
 
 import javax.inject.Inject;
 import javax.servlet.Filter;
