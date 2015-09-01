@@ -17,36 +17,36 @@ import java.util.Map;
 /**
  * @author Ivan St. Ivanov
  */
-@Named("game")
+@Named("gamesViewer")
 @RequestScoped
-public class GameBean {
-
-    @Inject
-    private GamesService gamesBusinessBean;
-
-    @Inject
-    private UserContext userContext;
+public class ViewGamesBean {
 
     private Map<Long, Prediction> currentUserPredictions = new HashMap<>();
 
     @Inject
-    private PredictionsService predictionsBusinessBean;
+    private GamesService gamesService;
+
+    @Inject
+    private PredictionsService predictionsService;
+
+    @Inject
+    private UserContext userContext;
 
     public List<Game> getFutureGamesForCurrentCompetition() {
         Competition selectedCompetition = userContext.getSelectedCompetition();
         loadCurrentUserPredictions(selectedCompetition);
-        return gamesBusinessBean.getFutureGamesForCompetition(selectedCompetition);
+        return gamesService.getFutureGamesForCompetition(selectedCompetition);
     }
 
     public List<Game> getCompletedGamesForCurrentCompetition() {
         Competition selectedCompetition = userContext.getSelectedCompetition();
         loadCurrentUserPredictions(selectedCompetition);
-        return gamesBusinessBean.getCompletedGamesForCompetition(selectedCompetition);
+        return gamesService.getCompletedGamesForCompetition(selectedCompetition);
     }
 
     private void loadCurrentUserPredictions(Competition selectedCompetition) {
         User loggedUser = userContext.getLoggedUser();
-        List<Prediction> predictions = predictionsBusinessBean.getPredictionsForUserAndCompetition(
+        List<Prediction> predictions = predictionsService.getPredictionsForUserAndCompetition(
                 loggedUser, selectedCompetition);
         predictions.forEach(prediction -> currentUserPredictions.put(prediction.getForGame().getId(), prediction));
     }

@@ -37,7 +37,7 @@ public class LoginBean {
 
     public String login() {
         if (userManager.validateUser(userName, password)) {
-            return "dashboard";
+            return "home";
         } else {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wrong user name or password", "Provide correct user name and password"));

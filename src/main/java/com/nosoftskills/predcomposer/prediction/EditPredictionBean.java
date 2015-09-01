@@ -13,9 +13,9 @@ import java.io.Serializable;
 /**
  * @author Ivan St. Ivanov
  */
-@Named("prediction")
+@Named("predictionEditor")
 @ConversationScoped
-public class PredictionBean implements Serializable{
+public class EditPredictionBean implements Serializable {
 
     private Game predictedGame;
     private String homeTeamPredictedGoals;
@@ -25,7 +25,7 @@ public class PredictionBean implements Serializable{
     @Inject
     private UserContext userContext;
     @Inject
-    private PredictionsService predictionBusinessBean;
+    private PredictionsService predictionsService;
 
     @Inject
     private Conversation conversation;
@@ -65,7 +65,7 @@ public class PredictionBean implements Serializable{
             this.awayTeamPredictedGoals = scores[1];
         }
 
-        return "prediction";
+        return "editPrediction";
     }
 
     public String submitPrediction() {
@@ -75,8 +75,8 @@ public class PredictionBean implements Serializable{
             prediction.setByUser(userContext.getLoggedUser());
         }
         prediction.setPredictedResult(homeTeamPredictedGoals + ":" + awayTeamPredictedGoals);
-        predictionBusinessBean.store(prediction);
+        predictionsService.store(prediction);
         conversation.end();
-        return "games";
+        return "futureGames";
     }
 }

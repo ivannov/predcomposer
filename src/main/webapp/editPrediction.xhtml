@@ -14,19 +14,19 @@
     <h:form>
         <table>
             <tr>
-                <td><h:outputText value="#{prediction.homeTeam}"/></td>
+                <td><h:outputText value="#{predictionEditor.homeTeam}"/></td>
                 <td>-</td>
-                <td><h:outputText value="#{prediction.awayTeam}"/></td>
+                <td><h:outputText value="#{predictionEditor.awayTeam}"/></td>
             </tr>
             <tr>
-                <td><h:inputText value="#{prediction.homeTeamPredictedGoals}"/></td>
+                <td><h:inputText value="#{predictionEditor.homeTeamPredictedGoals}"/></td>
                 <td>:</td>
-                <td><h:inputText value="#{prediction.awayTeamPredictedGoals}"/></td>
+                <td><h:inputText value="#{predictionEditor.awayTeamPredictedGoals}"/></td>
             </tr>
             <tr>
                 <td/><td/>
                 <td>
-                    <h:commandButton value="Submit" action="#{prediction.submitPrediction}"/>
+                    <h:commandButton value="Submit" action="#{predictionEditor.submitPrediction}"/>
                 </td>
             </tr>
         </table>

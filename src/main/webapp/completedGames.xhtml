@@ -11,7 +11,7 @@
     <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
     <p/>
     <h1>Completed games</h1>
-    <h:dataTable value="#{game.completedGamesForCurrentCompetition}" var="g">
+    <h:dataTable value="#{gamesViewer.completedGamesForCurrentCompetition}" var="g">
         <h:column>
             <f:facet name="header">Home team</f:facet>
             <h:outputText value="#{g.homeTeam}"/>
@@ -22,7 +22,7 @@
         </h:column>
         <h:column>
             <f:facet name="header">Result</f:facet>
-            <h:form><h:commandLink value="#{g.result}" action="#{userPredictions.getGamePredictions(g)}"/></h:form>
+            <h:form><h:commandLink value="#{g.result}" action="#{predictionsViewer.getGamePredictions(g)}"/></h:form>
         </h:column>
         <h:column>
             <f:facet name="header">Game time</f:facet>
@@ -30,7 +30,7 @@
         </h:column>
         <h:column>
             <f:facet name="header">Prediction</f:facet>
-            <h:outputText value="#{game.currentUserPredictions[g.id].predictedResult}"/>
+            <h:outputText value="#{gamesViewer.currentUserPredictions[g.id].predictedResult}"/>
         </h:column>
     </h:dataTable>
 </h:body>
