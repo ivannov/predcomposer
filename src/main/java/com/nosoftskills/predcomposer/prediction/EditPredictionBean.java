@@ -6,6 +6,8 @@ import com.nosoftskills.predcomposer.session.UserContext;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -75,7 +77,12 @@ public class EditPredictionBean implements Serializable {
             prediction.setByUser(userContext.getLoggedUser());
         }
         prediction.setPredictedResult(homeTeamPredictedGoals + ":" + awayTeamPredictedGoals);
-        predictionsService.store(prediction);
+        try {
+            predictionsService.store(prediction);
+        } catch (GameLockedException gle) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, gle.getMessage(), gle.getMessage()));
+        }
         conversation.end();
         return "/futureGames";
     }

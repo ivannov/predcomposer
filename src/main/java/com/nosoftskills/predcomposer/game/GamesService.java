@@ -35,6 +35,12 @@ public class GamesService implements Serializable {
         return gamesQuery.getResultList();
     }
 
+    public Game toggleLockedMode(Game game) {
+        Game changedGame = entityManager.merge(game);
+        changedGame.setLocked(!game.isLocked());
+        return changedGame;
+    }
+
     public Game storeGame(Game game) {
         if (game.getId() == null) {
             entityManager.persist(game);

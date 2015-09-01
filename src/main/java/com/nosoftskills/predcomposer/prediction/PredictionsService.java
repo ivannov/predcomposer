@@ -7,6 +7,7 @@ import com.nosoftskills.predcomposer.model.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.io.Serializable;
@@ -30,7 +31,18 @@ public class PredictionsService implements Serializable {
         return predictionsQuery.getResultList();
     }
 
-    public void store(Prediction prediction) {
+    public void store(Prediction prediction) throws GameLockedException {
+        final GameLockedException gameLockedException = new GameLockedException(
+                "The game " + prediction.getForGame().getHomeTeam() + " - " +
+                        prediction.getForGame().getAwayTeam() + " was locked before you submitted your proposal.");
+        try {
+            if (entityManager.merge(prediction.getForGame()).isLocked()) {
+                throw gameLockedException;
+            }
+        } catch (OptimisticLockException ole) {
+            throw gameLockedException;
+        }
+
         if (prediction.getId() == null) {
             entityManager.persist(prediction);
         } else {

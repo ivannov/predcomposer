@@ -36,15 +36,22 @@
             <c:set var="currentPrediction" value="#{gamesViewer.currentUserPredictions[g.id]}"/>
             <h:form>
                 <h:commandLink value="#{currentPrediction == null ? 'Predict' : currentPrediction.predictedResult}"
-                        action="#{predictionEditor.showPredictionForm(g, currentPrediction)}"/>
+                        action="#{predictionEditor.showPredictionForm(g, currentPrediction)}"
+                        rendered="#{!g.locked}"/>
             </h:form>
+            <h:outputText value="#{currentPrediction == null ? 'Locked' : currentPrediction.predictedResult}"
+                          rendered="#{g.locked}"/>
         </h:column>
         <h:column>
             <h:form>
                 <h:commandLink value="Edit" action="#{gameEditor.showEditGameForm(g)}" rendered="#{userContext.loggedUser.isAdmin}"/>
             </h:form>
         </h:column>
-
+        <h:column>
+            <h:form>
+                <h:commandLink value="#{g.locked ? 'Unlock' : 'Lock'}" action="#{gameLocker.toggleLockMode(g)}" rendered="#{userContext.loggedUser.isAdmin}"/>
+            </h:form>
+        </h:column>
     </h:dataTable>
 </h:body>
 
