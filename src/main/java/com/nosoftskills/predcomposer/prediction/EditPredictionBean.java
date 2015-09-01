@@ -54,7 +54,7 @@ public class EditPredictionBean implements Serializable {
         this.awayTeamPredictedGoals = awayTeamPredictedGoals;
     }
 
-    public String requestPrediction(Game predictedGame, Prediction prediction) {
+    public String showPredictionForm(Game predictedGame, Prediction prediction) {
         conversation.begin();
         this.predictedGame = predictedGame;
 
@@ -65,7 +65,7 @@ public class EditPredictionBean implements Serializable {
             this.awayTeamPredictedGoals = scores[1];
         }
 
-        return "editPrediction";
+        return "/editPrediction";
     }
 
     public String submitPrediction() {
@@ -77,6 +77,6 @@ public class EditPredictionBean implements Serializable {
         prediction.setPredictedResult(homeTeamPredictedGoals + ":" + awayTeamPredictedGoals);
         predictionsService.store(prediction);
         conversation.end();
-        return "futureGames";
+        return "/futureGames";
     }
 }

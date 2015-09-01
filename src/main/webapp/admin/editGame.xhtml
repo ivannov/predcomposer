@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Predictions composer</title>
+</h:head>
+
+<h:body>
+    <h4><h:outputText value="Hello, #{userContext.loggedUser.firstName}"/></h4>
+    <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
+    <p/>
+    <h1>Game details</h1>
+    <h:form>
+        <table>
+            <tr>
+                <td>Home team</td>
+                <td><h:inputText value="#{gameEditor.homeTeam}"/></td>
+            </tr>
+            <tr>
+                <td>Away team</td>
+                <td><h:inputText value="#{gameEditor.awayTeam}"/></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>Date</td>
+                <td>
+                    <h:inputText value="#{gameEditor.day}">
+                        <f:validateLongRange maximum="31" minimum="1" />
+                    </h:inputText>
+                </td>
+                <td>
+                    <h:selectOneMenu value="#{gameEditor.month}">
+                        <f:selectItems value="#{gameEditor.monthValues}"/>
+                    </h:selectOneMenu>
+                </td>
+                <td>
+                    <h:selectOneMenu value="#{gameEditor.year}">
+                        <f:selectItems value="#{gameEditor.yearValues}"/>
+                    </h:selectOneMenu>
+                </td>
+            </tr>
+            <tr>
+                <td>Time</td>
+                <td>
+                    <h:inputText value="#{gameEditor.hours}">
+                        <f:validateLongRange maximum="23" minimum="0" />
+                    </h:inputText>
+                </td>
+                <td>
+                    <h:inputText value="#{gameEditor.minutes}">
+                        <f:validateLongRange maximum="59" minimum="0" />
+                    </h:inputText>
+                </td>
+            </tr>
+        </table>
+        <h:commandButton value="Submit" action="#{gameEditor.saveNewGame}"/>
+    </h:form>
+</h:body>
+
+</html>

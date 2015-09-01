@@ -40,6 +40,9 @@ public class User implements Serializable {
 
 	private String lastName;
 
+    @Column(nullable = false)
+    private Boolean isAdmin = false;
+
 	@Lob
 	private byte[] avatar;
 
@@ -47,21 +50,22 @@ public class User implements Serializable {
     }
 
     public User(String userName, String password, String email) {
-        this(userName, password, email, null, null);
+        this(userName, password, email, null, null, false);
     }
 
     public User(String userName, String password, String email, String firstName,
-            String lastName) {
-        this(userName, password, email, firstName, lastName, null);
+            String lastName, boolean isAdmin) {
+        this(userName, password, email, firstName, lastName, isAdmin, null);
     }
 
     public User(String userName, String password, String email, String firstName,
-            String lastName, byte[] avatar) {
+            String lastName, boolean admin, byte[] avatar) {
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isAdmin = admin;
         this.avatar = avatar;
     }
 
@@ -121,6 +125,14 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean admin) {
+        this.isAdmin = admin;
+    }
+
     public byte[] getAvatar() {
         return avatar;
     }
@@ -129,8 +141,7 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return "User{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
@@ -138,11 +149,11 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
         if (this == o)
             return true;
         if (!(o instanceof User))
@@ -150,11 +161,11 @@ public class User implements Serializable {
         User user = (User) o;
         return Objects.equals(userName, user.userName) &&
                 Objects.equals(password, user.password) &&
-                Objects.equals(email, user.email);
+                Objects.equals(email, user.email) &&
+                Objects.equals(isAdmin, user.isAdmin);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userName, password, email);
+    @Override public int hashCode() {
+        return Objects.hash(userName, password, email, isAdmin);
     }
 }

@@ -13,7 +13,10 @@
 
 <h:body>
     <h4><h:outputText value="Hello, #{userContext.loggedUser.firstName}"/></h4>
-    <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
+    <h:form>
+        <h:commandLink value="logout" action="#{login.logout}"/><br/>
+        <h:commandLink value="Add new game" action="#{gameEditor.showEditGameForm}" rendered="#{userContext.loggedUser.isAdmin}"/>
+    </h:form>
     <p/>
     <h1>The list of all future games</h1>
     <h:dataTable value="#{gamesViewer.futureGamesForCurrentCompetition}" var="g">
@@ -30,11 +33,15 @@
             <h:outputText value="#{g.gameTimeFormatted}"/>
         </h:column>
         <h:column>
-            <f:facet name="header">Prediction</f:facet>
             <c:set var="currentPrediction" value="#{gamesViewer.currentUserPredictions[g.id]}"/>
             <h:form>
-                <h:commandLink value="#{currentPrediction == null ? 'Add' : currentPrediction.predictedResult}"
-                        action="#{predictionEditor.requestPrediction(g, currentPrediction)}"/>
+                <h:commandLink value="#{currentPrediction == null ? 'Predict' : currentPrediction.predictedResult}"
+                        action="#{predictionEditor.showPredictionForm(g, currentPrediction)}"/>
+            </h:form>
+        </h:column>
+        <h:column>
+            <h:form>
+                <h:commandLink value="Edit" action="#{gameEditor.showEditGameForm(g)}" rendered="#{userContext.loggedUser.isAdmin}"/>
             </h:form>
         </h:column>
 

@@ -4,11 +4,10 @@ import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,8 +15,7 @@ import java.util.List;
  * @author Ivan St. Ivanov
  */
 @Stateless
-@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class GamesService {
+public class GamesService implements Serializable {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -35,5 +33,14 @@ public class GamesService {
                 .createNamedQuery("getCompletedGamesForCompetition", Game.class);
         gamesQuery.setParameter("competition", competition);
         return gamesQuery.getResultList();
+    }
+
+    public Game storeGame(Game game) {
+        if (game.getId() == null) {
+            entityManager.persist(game);
+            return game;
+        } else {
+            return entityManager.merge(game);
+        }
     }
 }

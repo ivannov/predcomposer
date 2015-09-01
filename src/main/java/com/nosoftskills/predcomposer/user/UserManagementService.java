@@ -39,7 +39,4 @@ public class UserManagementService {
         }
     }
 
-    public void logout() {
-        userContext.setLoggedUser(null);
-    }
 }

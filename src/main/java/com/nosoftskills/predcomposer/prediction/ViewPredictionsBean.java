@@ -24,7 +24,7 @@ public class ViewPredictionsBean {
     public String getGamePredictions(Game game) {
         this.game = game;
         this.userPredictions = predictionsService.getPredictionsForGame(game);
-        return "gamePredictions";
+        return "/gamePredictions";
     }
 
     public Game getGame() {

@@ -12,6 +12,7 @@
     <h1>Options</h1>
     <h:outputLink value="futureGames.xhtml">Predict a match</h:outputLink><br/>
     <h:outputLink value="completedGames.xhtml">Completed matches</h:outputLink><br/>
+    <h:form rendered="#{userContext.loggedUser.isAdmin}"><h:commandLink value="Add new game" action="#{gameEditor.showEditGameForm}"/></h:form>
 </h:body>
 
 </html>

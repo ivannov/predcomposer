@@ -37,16 +37,16 @@ public class LoginBean {
 
     public String login() {
         if (userManager.validateUser(userName, password)) {
-            return "home";
+            return "/home";
         } else {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wrong user name or password", "Provide correct user name and password"));
-            return "login";
+            return "/login";
         }
     }
 
     public String logout() {
-        userManager.logout();
-        return "login";
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/login";
     }
 }

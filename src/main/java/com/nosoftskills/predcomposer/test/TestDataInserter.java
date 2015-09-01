@@ -26,9 +26,9 @@ public class TestDataInserter {
 
     @PostConstruct
     public void insertTestData() {
-        User user1 = new User("ivan", "ivan", "ivan@example.com", "Ivan", "Ivanov");
+        User user1 = new User("ivan", "ivan", "ivan@example.com", "Ivan", "Ivanov", true);
         entityManager.persist(user1);
-        User user2 = new User("koko", "koko", "koko@example.com", "Koko", "Stefanov");
+        User user2 = new User("koko", "koko", "koko@example.com", "Koko", "Stefanov", false);
         entityManager.persist(user2);
 
         entityManager.persist(DEFAULT_COMPETITION);

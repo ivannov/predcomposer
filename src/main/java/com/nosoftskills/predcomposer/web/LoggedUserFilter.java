@@ -1,5 +1,6 @@
 package com.nosoftskills.predcomposer.web;
 
+import com.nosoftskills.predcomposer.model.User;
 import com.nosoftskills.predcomposer.session.UserContext;
 
 import javax.inject.Inject;
@@ -32,8 +33,14 @@ public class LoggedUserFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException {
         String reqURI = ((HttpServletRequest) request).getRequestURI();
-        if (!reqURI.contains("login.xhtml") && userContext.getLoggedUser() == null) {
-            ((HttpServletResponse) response).sendRedirect("login.xhtml");
+        User loggedUser = userContext.getLoggedUser();
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+        if (!reqURI.contains("login.xhtml") && loggedUser == null) {
+            httpServletResponse.sendRedirect("login.xhtml");
+        } else if (reqURI.contains("admin/") && !loggedUser.getIsAdmin()) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            httpServletResponse.getWriter().write("Forbidden");
+            httpServletResponse.getWriter().flush();
         } else {
             chain.doFilter(request, response);
         }
