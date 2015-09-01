@@ -19,7 +19,7 @@ public class UserPredictionsBean {
     private Set<Prediction> userPredictions;
 
     @Inject
-    private PredictionBusinessBean predictionBusinessBean;
+    private PredictionsService predictionBusinessBean;
 
     public String getGamePredictions(Game game) {
         this.game = game;

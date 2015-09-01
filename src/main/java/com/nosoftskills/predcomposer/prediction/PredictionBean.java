@@ -25,7 +25,7 @@ public class PredictionBean implements Serializable{
     @Inject
     private UserContext userContext;
     @Inject
-    private PredictionBusinessBean predictionBusinessBean;
+    private PredictionsService predictionBusinessBean;
 
     @Inject
     private Conversation conversation;

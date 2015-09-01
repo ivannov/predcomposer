@@ -14,7 +14,7 @@ import javax.inject.Named;
 public class LoginBean {
 
     @Inject
-    private UserManagementBean userManager;
+    private UserManagementService userManager;
 
     private String userName;
     private String password;

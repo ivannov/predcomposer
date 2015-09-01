@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class GamesBusinessBean {
+public class GamesService {
 
     @PersistenceContext
     private EntityManager entityManager;

@@ -17,7 +17,7 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class UserManagementBean {
+public class UserManagementService {
 
     @PersistenceContext
     private EntityManager entityManager;

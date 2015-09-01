@@ -4,7 +4,7 @@ import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.model.Prediction;
 import com.nosoftskills.predcomposer.model.User;
-import com.nosoftskills.predcomposer.prediction.PredictionBusinessBean;
+import com.nosoftskills.predcomposer.prediction.PredictionsService;
 import com.nosoftskills.predcomposer.session.UserContext;
 
 import javax.enterprise.context.RequestScoped;
@@ -22,7 +22,7 @@ import java.util.Map;
 public class GameBean {
 
     @Inject
-    private GamesBusinessBean gamesBusinessBean;
+    private GamesService gamesBusinessBean;
 
     @Inject
     private UserContext userContext;
@@ -30,7 +30,7 @@ public class GameBean {
     private Map<Long, Prediction> currentUserPredictions = new HashMap<>();
 
     @Inject
-    private PredictionBusinessBean predictionsBusinessBean;
+    private PredictionsService predictionsBusinessBean;
 
     public List<Game> getFutureGamesForCurrentCompetition() {
         Competition selectedCompetition = userContext.getSelectedCompetition();

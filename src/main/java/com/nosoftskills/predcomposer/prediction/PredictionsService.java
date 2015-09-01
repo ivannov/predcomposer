@@ -17,7 +17,7 @@ import java.util.Set;
  * @author Ivan St. Ivanov
  */
 @Stateless
-public class PredictionBusinessBean implements Serializable {
+public class PredictionsService implements Serializable {
 
     @PersistenceContext
     private EntityManager entityManager;
