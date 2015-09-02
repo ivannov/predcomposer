@@ -20,7 +20,8 @@ import java.util.Set;
 @Entity
 @Table(name = "Users")
 @NamedQueries({
-        @NamedQuery(name = "findUserByNameAndPassword", query = "SELECT u FROM User u WHERE u.userName = :userName AND u.password = :password")
+        @NamedQuery(name = "findUserByNameAndPassword", query = "SELECT u FROM User u WHERE u.userName = :userName AND u.password = :password"),
+        @NamedQuery(name = "getAllUsers", query = "SELECT u FROM User u")
 })
 public class User implements Serializable {
 

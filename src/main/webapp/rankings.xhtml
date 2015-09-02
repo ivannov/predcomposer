@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Predictions composer</title>
+</h:head>
+
+<h:body>
+    <h4><h:outputText value="Hello, #{userContext.loggedUser.firstName}"/></h4>
+    <h:form>
+        <h:commandLink value="logout" action="#{login.logout}"/><br/>
+        <h:commandLink value="Re-calculate" action="#{rankingsViewer.recalculate}" rendered="#{userContext.loggedUser.isAdmin}"/>
+    </h:form>
+    <p/>
+    <h1>Rankings</h1>
+    <h:dataTable value="#{rankingsViewer.userScores}" var="s">
+        <h:column>
+            <f:facet name="header">User</f:facet>
+            <h:outputText value="#{s.user.userName}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Points</f:facet>
+            <h:outputText value="#{s.points}"/>
+        </h:column>
+    </h:dataTable>
+</h:body>
+
+</html>

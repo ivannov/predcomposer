@@ -49,6 +49,26 @@ public class EditGameBean implements Serializable {
         theGame.setAwayTeam(awayTeam);
     }
 
+    private String homeTeamScore;
+
+    public String getHomeTeamScore() {
+        return homeTeamScore;
+    }
+
+    public void setHomeTeamScore(String homeTeamScore) {
+        this.homeTeamScore = homeTeamScore;
+    }
+
+    private String awayTeamScore;
+
+    public String getAwayTeamScore() {
+        return awayTeamScore;
+    }
+
+    public void setAwayTeamScore(String awayTeamScore) {
+        this.awayTeamScore = awayTeamScore;
+    }
+
     private int day;
 
     public int getDay() {
@@ -148,6 +168,11 @@ public class EditGameBean implements Serializable {
             year = gameToEdit.getGameTime().getYear();
             hours = gameToEdit.getGameTime().getHour();
             minutes = gameToEdit.getGameTime().getMinute();
+            if (gameToEdit.getResult() != null) {
+                String[] goals = gameToEdit.getResult().split(":");
+                homeTeamScore = goals[0];
+                awayTeamScore = goals[1];
+            }
         } else {
             final LocalDate now = LocalDate.now();
             theGame = new Game();
@@ -167,6 +192,9 @@ public class EditGameBean implements Serializable {
         LocalDateTime gameTime = LocalDateTime.of(year, month, day, hours, minutes);
 
         theGame.setGameTime(gameTime);
+        if (homeTeamScore != null && awayTeamScore != null) {
+            theGame.setResult(homeTeamScore + ":" + awayTeamScore);
+        }
 
         gamesService.storeGame(theGame);
         gameEvent.fire(theGame);
