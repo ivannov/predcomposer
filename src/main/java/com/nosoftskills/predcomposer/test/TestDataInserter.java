@@ -13,6 +13,8 @@ import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import static com.nosoftskills.predcomposer.user.PasswordHashUtil.hashPassword;
+
 /**
  * @author Ivan St. Ivanov
  */
@@ -27,9 +29,9 @@ public class TestDataInserter {
 
     @PostConstruct
     public void insertTestData() {
-        User user1 = new User("ivan", "ivan", "ivan@example.com", "Ivan", "Ivanov", true);
+        User user1 = new User("ivan", hashPassword("ivan"), "ivan@example.com", "Ivan", "Ivanov", true);
         entityManager.persist(user1);
-        User user2 = new User("koko", "koko", "koko@example.com", "Koko", "Stefanov", false);
+        User user2 = new User("koko", hashPassword("koko"), "koko@example.com", "Koko", "Stefanov", false);
         entityManager.persist(user2);
 
         Game game1 = new Game("Manchester United", "Club Brugge", "3:1", LocalDateTime.of(2015, 8, 18, 21, 45), true);

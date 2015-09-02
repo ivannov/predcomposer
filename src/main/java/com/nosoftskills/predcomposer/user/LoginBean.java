@@ -9,6 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import static com.nosoftskills.predcomposer.user.PasswordHashUtil.hashPassword;
+
 /**
  * @author Ivan St. Ivanov
  */
@@ -42,7 +44,7 @@ public class LoginBean {
     }
 
     public String login() {
-        User user = userManager.validateUser(userName, password);
+        User user = userManager.validateUser(userName, hashPassword(password));
         if (user != null) {
             userContext.setLoggedUser(user);
             return "/home";
