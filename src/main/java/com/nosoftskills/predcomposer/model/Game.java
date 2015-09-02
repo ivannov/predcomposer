@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "getRecentGames", query = "SELECT g from Game g WHERE g.gameTime <= :kickoffTime")
+        @NamedQuery(name = "getRecentGames", query = "SELECT g from Game g WHERE g.gameTime <= :kickoffTime AND g.locked = FALSE")
 })
 public class Game implements Serializable, Comparable<Game> {
 
