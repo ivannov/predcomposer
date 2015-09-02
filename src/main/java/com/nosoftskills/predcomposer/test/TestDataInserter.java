@@ -11,6 +11,7 @@ import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 /**
  * @author Ivan St. Ivanov
@@ -31,21 +32,18 @@ public class TestDataInserter {
         User user2 = new User("koko", "koko", "koko@example.com", "Koko", "Stefanov", false);
         entityManager.persist(user2);
 
+        Game game1 = new Game("Manchester United", "Club Brugge", "3:1", LocalDateTime.of(2015, 8, 18, 21, 45), true);
+        Game game2 = new Game("Club Brugge", "Manchester United", "0:4", LocalDateTime.of(2015, 8, 26, 21, 45), true);
+        Game game3 = new Game("Paris SG", "Malmo", LocalDateTime.of(2015, 9, 15, 21, 45));
+        Game game4 = new Game("Real Madrid", "Shakhtar Donetsk", LocalDateTime.of(2015, 9, 15, 21, 45));
+        Game game5 = new Game("Leverkusen", "BATE", LocalDateTime.of(2015, 9, 16, 21, 45));
+        Game game6 = new Game("Roma", "Barcelona", LocalDateTime.of(2015, 9, 16, 21, 45));
+
+        DEFAULT_COMPETITION.getGames().addAll(Arrays.asList(game1, game2, game3, game4, game5, game6));
         entityManager.persist(DEFAULT_COMPETITION);
 
-        entityManager.persist(new Game(DEFAULT_COMPETITION, "Manchester United", "Club Brugge", "3:1", LocalDateTime.of(2015, 8, 18, 21, 45), true));
-        Game game1 = new Game(DEFAULT_COMPETITION, "Club Brugge", "Manchester United", "0:4",
-                LocalDateTime.of(2015, 8, 26, 21, 45), true);
-        entityManager.persist(game1);
-        Game game2 = new Game(DEFAULT_COMPETITION, "Paris SG", "Malmo",
-                LocalDateTime.of(2015, 9, 15, 21, 45));
-        entityManager.persist(game2);
-        entityManager.persist(new Game(DEFAULT_COMPETITION, "Real Madrid", "Shakhtar Donetsk", LocalDateTime.of(2015, 9, 15, 21, 45)));
-        entityManager.persist(new Game(DEFAULT_COMPETITION, "Leverkusen", "BATE", LocalDateTime.of(2015, 9, 16, 21, 45)));
-        entityManager.persist(new Game(DEFAULT_COMPETITION, "Roma", "Barcelona", LocalDateTime.of(2015, 9, 16, 21, 45)));
-
-        entityManager.persist(new Prediction(user1, game1, "0:0"));
-        entityManager.persist(new Prediction(user2, game1, "0:2"));
-        entityManager.persist(new Prediction(user1, game2, "2:0"));
+        entityManager.persist(new Prediction(user1, game2, "0:0"));
+        entityManager.persist(new Prediction(user2, game2, "0:2"));
+        entityManager.persist(new Prediction(user1, game3, "2:0"));
     }
 }

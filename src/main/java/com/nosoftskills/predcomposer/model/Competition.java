@@ -28,7 +28,7 @@ public class Competition implements Serializable {
 
 	private String description;
 
-	@OneToMany(mappedBy = "competition", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Game> games = new HashSet<>();
 
     public Competition() {
@@ -89,7 +89,6 @@ public class Competition implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", games=" + games +
                 '}';
     }
 

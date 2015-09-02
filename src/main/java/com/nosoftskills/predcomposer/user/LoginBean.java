@@ -1,5 +1,8 @@
 package com.nosoftskills.predcomposer.user;
 
+import com.nosoftskills.predcomposer.model.User;
+import com.nosoftskills.predcomposer.session.UserContext;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -15,6 +18,9 @@ public class LoginBean {
 
     @Inject
     private UserManagementService userManager;
+
+    @Inject
+    private UserContext userContext;
 
     private String userName;
     private String password;
@@ -36,7 +42,9 @@ public class LoginBean {
     }
 
     public String login() {
-        if (userManager.validateUser(userName, password)) {
+        User user = userManager.validateUser(userName, password);
+        if (user != null) {
+            userContext.setLoggedUser(user);
             return "/home";
         } else {
             FacesContext.getCurrentInstance().addMessage(null,

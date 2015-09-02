@@ -11,8 +11,8 @@
     <h4><h:outputText value="Hello, #{userContext.loggedUser.firstName}"/></h4>
     <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
     <p/>
-    <h1>Predictions for <h:outputText value="#{predictionsViewer.game.homeTeam} - #{predictionsViewer.game.awayTeam} #{predictionsViewer.game.result}"/></h1>
-    <h:dataTable value="#{predictionsViewer.userPredictions}" var="p">
+    <h1>Predictions for <h:outputText value="#{gamePredictionsViewer.game.homeTeam} - #{gamePredictionsViewer.game.awayTeam} #{gamePredictionsViewer.game.result}"/></h1>
+    <h:dataTable value="#{gamePredictionsViewer.predictions}" var="p">
         <h:column>
             <f:facet name="header">User</f:facet>
             <h:outputText value="#{p.byUser.userName}"/>

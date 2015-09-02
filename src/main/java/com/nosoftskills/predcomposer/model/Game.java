@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,12 +19,9 @@ import java.util.Set;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "getFutureGamesForCompetition",
-                query = "SELECT g FROM Game g WHERE g.competition = :competition AND g.gameTime >= :after ORDER BY g.gameTime"),
-        @NamedQuery(name = "getCompletedGamesForCompetition",
-                query = "SELECT g FROM Game g WHERE g.competition = :competition AND g.result IS NOT NULL")
+        @NamedQuery(name = "getRecentGames", query = "SELECT g from Game g WHERE g.gameTime <= :kickoffTime")
 })
-public class Game implements Serializable {
+public class Game implements Serializable, Comparable<Game> {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
             "dd MMM, HH:mm");
@@ -36,9 +32,6 @@ public class Game implements Serializable {
 
 	@Version
 	private int version;
-
-    @ManyToOne
-    private Competition competition;
 
 	@Column(nullable = false)
 	private String homeTeam;
@@ -60,14 +53,11 @@ public class Game implements Serializable {
     public Game() {
     }
 
-    public Game(Competition competition, String homeTeam, String awayTeam,
-            LocalDateTime gameTime) {
-        this(competition, homeTeam, awayTeam, null, gameTime, false);
+    public Game(String homeTeam, String awayTeam, LocalDateTime gameTime) {
+        this(homeTeam, awayTeam, null, gameTime, false);
     }
 
-    public Game(Competition competition, String homeTeam, String awayTeam, String result,
-            LocalDateTime gameTime, boolean locked) {
-        this.competition = competition;
+    public Game(String homeTeam, String awayTeam, String result, LocalDateTime gameTime, boolean locked) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.result = result;
@@ -89,14 +79,6 @@ public class Game implements Serializable {
 
     public void setVersion(int version) {
         this.version = version;
-    }
-
-    public Competition getCompetition() {
-        return competition;
-    }
-
-    public void setCompetition(Competition competition) {
-        this.competition = competition;
     }
 
     public String getHomeTeam() {
@@ -156,12 +138,10 @@ public class Game implements Serializable {
     public String toString() {
         return "Game{" +
                 "id=" + id +
-                ", competition=" + competition +
                 ", homeTeam='" + homeTeam + '\'' +
                 ", awayTeam='" + awayTeam + '\'' +
                 ", result='" + result + '\'' +
                 ", gameTime=" + gameTime +
-                ", predictions=" + predictions +
                 ", locked=" + locked +
                 '}';
     }
@@ -173,14 +153,18 @@ public class Game implements Serializable {
         if (!(o instanceof Game))
             return false;
         Game game = (Game) o;
-        return Objects.equals(competition, game.competition) &&
-                Objects.equals(homeTeam, game.homeTeam) &&
+        return Objects.equals(homeTeam, game.homeTeam) &&
                 Objects.equals(awayTeam, game.awayTeam) &&
                 Objects.equals(gameTime, game.gameTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(competition, homeTeam, awayTeam, gameTime);
+        return Objects.hash(homeTeam, awayTeam, gameTime);
+    }
+
+    @Override
+    public int compareTo(Game game) {
+        return this.getGameTime().compareTo(game.getGameTime());
     }
 }

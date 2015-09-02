@@ -23,14 +23,6 @@ public class PredictionsService implements Serializable {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Prediction> getPredictionsForUserAndCompetition(User user, Competition competition) {
-        TypedQuery<Prediction> predictionsQuery = entityManager
-                .createNamedQuery("getPredictionsForUserAndCompetition", Prediction.class);
-        predictionsQuery.setParameter("user", user);
-        predictionsQuery.setParameter("competition", competition);
-        return predictionsQuery.getResultList();
-    }
-
     public void store(Prediction prediction) throws GameLockedException {
         final GameLockedException gameLockedException = new GameLockedException(
                 "The game " + prediction.getForGame().getHomeTeam() + " - " +
@@ -44,6 +36,7 @@ public class PredictionsService implements Serializable {
         }
 
         if (prediction.getId() == null) {
+            prediction.setByUser(entityManager.merge(prediction.getByUser()));
             entityManager.persist(prediction);
         } else {
             entityManager.merge(prediction);
@@ -53,5 +46,10 @@ public class PredictionsService implements Serializable {
     public Set<Prediction> getPredictionsForGame(Game game) {
         Game mergedGame = entityManager.merge(game);
         return mergedGame.getPredictions();
+    }
+
+    public Set<Prediction> getPredictionsForUser(User user) {
+        User mergedUser = entityManager.merge(user);
+        return mergedUser.getPredictions();
     }
 }

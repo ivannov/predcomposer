@@ -1,57 +1,62 @@
 package com.nosoftskills.predcomposer.game;
 
+import com.nosoftskills.predcomposer.competition.CompetitionService;
 import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
-import com.nosoftskills.predcomposer.model.Prediction;
-import com.nosoftskills.predcomposer.model.User;
-import com.nosoftskills.predcomposer.prediction.PredictionsService;
 import com.nosoftskills.predcomposer.session.UserContext;
 
-import javax.enterprise.context.RequestScoped;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.HashMap;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * @author Ivan St. Ivanov
  */
 @Named("gamesViewer")
-@RequestScoped
+@ApplicationScoped
 public class ViewGamesBean {
 
-    private Map<Long, Prediction> currentUserPredictions = new HashMap<>();
-
-    @Inject
-    private GamesService gamesService;
-
-    @Inject
-    private PredictionsService predictionsService;
+    private Map<Long, Game> gamesMap = new TreeMap<>(Comparator.reverseOrder());
 
     @Inject
     private UserContext userContext;
 
-    public List<Game> getFutureGamesForCurrentCompetition() {
+    @Inject
+    private CompetitionService competitionService;
+
+    @PostConstruct
+    public void loadGames() {
         Competition selectedCompetition = userContext.getSelectedCompetition();
-        loadCurrentUserPredictions(selectedCompetition);
-        return gamesService.getFutureGamesForCompetition(selectedCompetition);
+        Set<Game> games = competitionService.getGamesForCompetition(selectedCompetition);
+        games.forEach(game -> gamesMap.put(game.getId(), game));
     }
 
-    public List<Game> getCompletedGamesForCurrentCompetition() {
-        Competition selectedCompetition = userContext.getSelectedCompetition();
-        loadCurrentUserPredictions(selectedCompetition);
-        return gamesService.getCompletedGamesForCompetition(selectedCompetition);
+    public List<Game> getFutureGames() {
+        return getGames(game -> game.getGameTime().isAfter(LocalDate.now().atStartOfDay()));
     }
 
-    private void loadCurrentUserPredictions(Competition selectedCompetition) {
-        User loggedUser = userContext.getLoggedUser();
-        List<Prediction> predictions = predictionsService.getPredictionsForUserAndCompetition(
-                loggedUser, selectedCompetition);
-        predictions.forEach(prediction -> currentUserPredictions.put(prediction.getForGame().getId(), prediction));
+    public List<Game> getCompletedGames() {
+        return getGames(game -> game.getGameTime().isBefore(LocalDate.now().atStartOfDay()));
     }
 
-    public Map<Long, Prediction> getCurrentUserPredictions() {
-        return currentUserPredictions;
+    private List<Game> getGames(Predicate<Game> gamePredicate) {
+        return gamesMap.values()
+                .stream()
+                .filter(gamePredicate)
+                .collect(Collectors.toList());
+    }
+
+    public void gameChanged(@Observes Game game) {
+        gamesMap.put(game.getId(), game);
     }
 }

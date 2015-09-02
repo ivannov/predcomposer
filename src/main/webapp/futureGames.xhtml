@@ -19,7 +19,7 @@
     </h:form>
     <p/>
     <h1>The list of all future games</h1>
-    <h:dataTable value="#{gamesViewer.futureGamesForCurrentCompetition}" var="g">
+    <h:dataTable value="#{gamesViewer.futureGames}" var="g">
         <h:column>
             <f:facet name="header">Home team</f:facet>
             <h:outputText value="#{g.homeTeam}"/>
@@ -33,7 +33,7 @@
             <h:outputText value="#{g.gameTimeFormatted}"/>
         </h:column>
         <h:column>
-            <c:set var="currentPrediction" value="#{gamesViewer.currentUserPredictions[g.id]}"/>
+            <c:set var="currentPrediction" value="#{userPredictionsViewer.userPredictions[g.id]}"/>
             <h:form>
                 <h:commandLink value="#{currentPrediction == null ? 'Predict' : currentPrediction.predictedResult}"
                         action="#{predictionEditor.showPredictionForm(g, currentPrediction)}"

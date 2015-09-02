@@ -16,26 +16,20 @@ import javax.persistence.TypedQuery;
  * @author Ivan St. Ivanov
  */
 @Stateless
-@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class UserManagementService {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Inject
-    private UserContext userContext;
-
-    public boolean validateUser(String userName, String password) {
+    public User validateUser(String userName, String password) {
         TypedQuery<User> validateUserQuery = entityManager.createNamedQuery(
                 "findUserByNameAndPassword", User.class);
         validateUserQuery.setParameter("userName", userName);
         validateUserQuery.setParameter("password", password);
         try {
-            User loggedUser = validateUserQuery.getSingleResult();
-            userContext.setLoggedUser(loggedUser);
-            return true;
+            return validateUserQuery.getSingleResult();
         } catch (NoResultException nre) {
-            return false;
+            return null;
         }
     }
 

@@ -5,9 +5,11 @@ import com.nosoftskills.predcomposer.session.UserContext;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.LinkedHashMap;
@@ -30,8 +32,6 @@ public class EditGameBean implements Serializable {
 
     @Inject
     private Conversation conversation;
-
-    private static final LocalDateTime NOW = LocalDateTime.now();
 
     public String getHomeTeam() {
         return theGame.getHomeTeam();
@@ -124,7 +124,7 @@ public class EditGameBean implements Serializable {
     private static final Map<String, Integer> yearValues;
     static {
         yearValues = new LinkedHashMap<>(4);
-        int currentYear = NOW.getYear();
+        int currentYear = LocalDate.now().getYear();
         yearValues.put(Integer.toString(currentYear - 1), currentYear - 1);
         yearValues.put(Integer.toString(currentYear), currentYear);
         yearValues.put(Integer.toString(currentYear + 1), currentYear + 1);
@@ -149,16 +149,19 @@ public class EditGameBean implements Serializable {
             hours = gameToEdit.getGameTime().getHour();
             minutes = gameToEdit.getGameTime().getMinute();
         } else {
+            final LocalDate now = LocalDate.now();
             theGame = new Game();
-            theGame.setCompetition(userContext.getSelectedCompetition());
-            day = NOW.getDayOfMonth();
-            month = NOW.getMonth();
-            year = NOW.getYear();
+            day = now.getDayOfMonth();
+            month = now.getMonth();
+            year = now.getYear();
             hours = 21;
             minutes = 45;
         }
         return "/admin/editGame";
     }
+
+    @Inject
+    private Event<Game> gameEvent;
 
     public String saveNewGame() {
         LocalDateTime gameTime = LocalDateTime.of(year, month, day, hours, minutes);
@@ -166,6 +169,7 @@ public class EditGameBean implements Serializable {
         theGame.setGameTime(gameTime);
 
         gamesService.storeGame(theGame);
+        gameEvent.fire(theGame);
         conversation.end();
         return "/futureGames";
     }

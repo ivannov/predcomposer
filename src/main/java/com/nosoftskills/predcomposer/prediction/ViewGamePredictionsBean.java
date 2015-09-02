@@ -11,19 +11,20 @@ import java.util.Set;
 /**
  * @author Ivan St. Ivanov
  */
-@Named("predictionsViewer")
+@Named("gamePredictionsViewer")
 @RequestScoped
-public class ViewPredictionsBean {
+public class ViewGamePredictionsBean {
 
     private Game game;
-    private Set<Prediction> userPredictions;
+
+    private Set<Prediction> predictions;
 
     @Inject
     private PredictionsService predictionsService;
 
-    public String getGamePredictions(Game game) {
+    public String showGamePredictions(Game game) {
         this.game = game;
-        this.userPredictions = predictionsService.getPredictionsForGame(game);
+        this.predictions = predictionsService.getPredictionsForGame(game);
         return "/gamePredictions";
     }
 
@@ -31,7 +32,7 @@ public class ViewPredictionsBean {
         return game;
     }
 
-    public Set<Prediction> getUserPredictions() {
-        return userPredictions;
+    public Set<Prediction> getPredictions() {
+        return predictions;
     }
 }

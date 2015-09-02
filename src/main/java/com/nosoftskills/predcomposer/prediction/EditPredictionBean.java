@@ -6,6 +6,7 @@ import com.nosoftskills.predcomposer.session.UserContext;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ public class EditPredictionBean implements Serializable {
     private Game predictedGame;
     private String homeTeamPredictedGoals;
     private String awayTeamPredictedGoals;
-    private Prediction prediction;
+    private Prediction thePrediction;
 
     @Inject
     private UserContext userContext;
@@ -61,7 +62,7 @@ public class EditPredictionBean implements Serializable {
         this.predictedGame = predictedGame;
 
         if (prediction != null) {
-            this.prediction = prediction;
+            this.thePrediction = prediction;
             String[] scores = prediction.getPredictedResult().split(":");
             this.homeTeamPredictedGoals = scores[0];
             this.awayTeamPredictedGoals = scores[1];
@@ -70,15 +71,19 @@ public class EditPredictionBean implements Serializable {
         return "/editPrediction";
     }
 
+    @Inject
+    private Event<Prediction> predictionEvent;
+
     public String submitPrediction() {
-        if (prediction == null) {
-            prediction = new Prediction();
-            prediction.setForGame(predictedGame);
-            prediction.setByUser(userContext.getLoggedUser());
+        if (thePrediction == null) {
+            thePrediction = new Prediction();
+            thePrediction.setForGame(predictedGame);
+            thePrediction.setByUser(userContext.getLoggedUser());
         }
-        prediction.setPredictedResult(homeTeamPredictedGoals + ":" + awayTeamPredictedGoals);
+        thePrediction.setPredictedResult(homeTeamPredictedGoals + ":" + awayTeamPredictedGoals);
         try {
-            predictionsService.store(prediction);
+            predictionsService.store(thePrediction);
+            predictionEvent.fire(thePrediction);
         } catch (GameLockedException gle) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, gle.getMessage(), gle.getMessage()));
