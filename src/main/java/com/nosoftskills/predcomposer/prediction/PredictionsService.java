@@ -1,6 +1,5 @@
 package com.nosoftskills.predcomposer.prediction;
 
-import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.model.Prediction;
 import com.nosoftskills.predcomposer.model.User;
@@ -9,9 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,7 +18,7 @@ import java.util.Set;
 public class PredictionsService implements Serializable {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
     public void store(Prediction prediction) throws GameLockedException {
         final GameLockedException gameLockedException = new GameLockedException(
@@ -49,7 +46,7 @@ public class PredictionsService implements Serializable {
     }
 
     public Set<Prediction> getPredictionsForUser(User user) {
-        User mergedUser = entityManager.merge(user);
+        User mergedUser = entityManager.find(User.class, user.getId());
         return mergedUser.getPredictions();
     }
 }

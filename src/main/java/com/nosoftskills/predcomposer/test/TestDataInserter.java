@@ -30,9 +30,7 @@ public class TestDataInserter {
     @PostConstruct
     public void insertTestData() {
         User user1 = new User("ivan", hashPassword("ivan"), "ivan@example.com", "Ivan", "Ivanov", true);
-        entityManager.persist(user1);
         User user2 = new User("koko", hashPassword("koko"), "koko@example.com", "Koko", "Stefanov", false);
-        entityManager.persist(user2);
 
         Game game1 = new Game("Manchester United", "Club Brugge", "3:1", LocalDateTime.of(2015, 8, 18, 21, 45), true);
         Game game2 = new Game("Club Brugge", "Manchester United", "0:4", LocalDateTime.of(2015, 8, 26, 21, 45), true);
@@ -41,11 +39,22 @@ public class TestDataInserter {
         Game game5 = new Game("Leverkusen", "BATE", LocalDateTime.of(2015, 9, 16, 21, 45));
         Game game6 = new Game("Roma", "Barcelona", LocalDateTime.of(2015, 9, 16, 21, 45));
 
-        DEFAULT_COMPETITION.getGames().addAll(Arrays.asList(game1, game2, game3, game4, game5, game6));
-        entityManager.persist(DEFAULT_COMPETITION);
 
-        entityManager.persist(new Prediction(user1, game2, "0:0"));
-        entityManager.persist(new Prediction(user2, game2, "0:2"));
-        entityManager.persist(new Prediction(user1, game3, "2:0"));
+        Prediction prediction1 = new Prediction(user1, game2, "0:0");
+        Prediction prediction2 = new Prediction(user2, game2, "0:2");
+        Prediction prediction3 = new Prediction(user1, game3, "2:0");
+
+        user1.getPredictions().addAll(Arrays.asList(prediction1, prediction3));
+        user1.getPredictions().add(prediction2);
+
+        entityManager.persist(user1);
+        entityManager.persist(user2);
+
+        game2.getPredictions().addAll(Arrays.asList(prediction1, prediction2));
+        game3.getPredictions().add(prediction3);
+
+        DEFAULT_COMPETITION.getGames().addAll(
+                Arrays.asList(game1, game2, game3, game4, game5, game6));
+        entityManager.persist(DEFAULT_COMPETITION);
     }
 }
