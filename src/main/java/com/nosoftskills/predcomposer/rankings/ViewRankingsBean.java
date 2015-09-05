@@ -2,7 +2,7 @@ package com.nosoftskills.predcomposer.rankings;
 
 import com.nosoftskills.predcomposer.model.User;
 import com.nosoftskills.predcomposer.prediction.PredictionsService;
-import com.nosoftskills.predcomposer.user.UserService;
+import com.nosoftskills.predcomposer.user.UsersService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -22,7 +22,7 @@ public class ViewRankingsBean {
     private List<Score> userScores = new ArrayList<>();
 
     @Inject
-    private UserService userService;
+    private UsersService usersService;
 
     @Inject
     private PredictionsService predictionsService;
@@ -41,7 +41,7 @@ public class ViewRankingsBean {
     }
 
     private void calculateAllScores() {
-        userScores = userService.getAllUsers()
+        userScores = usersService.getAllUsers()
                 .stream()
                 .map(this::calculateScore)
                 .sorted()

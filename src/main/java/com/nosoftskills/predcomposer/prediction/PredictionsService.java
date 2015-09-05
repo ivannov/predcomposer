@@ -20,6 +20,10 @@ public class PredictionsService implements Serializable {
     @PersistenceContext
     EntityManager entityManager;
 
+    public Prediction findPredictionById(Long id) {
+        return entityManager.find(Prediction.class, id);
+    }
+
     public void store(Prediction prediction) throws GameLockedException {
         final GameLockedException gameLockedException = new GameLockedException(
                 "The game " + prediction.getForGame().getHomeTeam() + " - " +
@@ -33,8 +37,14 @@ public class PredictionsService implements Serializable {
         }
 
         if (prediction.getId() == null) {
-            prediction.setByUser(entityManager.merge(prediction.getByUser()));
-            entityManager.persist(prediction);
+            Game mergedGame = entityManager.merge(prediction.getForGame());
+            mergedGame.getPredictions().add(prediction);
+            prediction.setForGame(mergedGame);
+
+            User mergedUser = entityManager.merge(prediction.getByUser());
+            mergedUser.getPredictions().add(prediction);
+            prediction.setByUser(mergedUser);
+
         } else {
             entityManager.merge(prediction);
         }
@@ -46,7 +56,7 @@ public class PredictionsService implements Serializable {
     }
 
     public Set<Prediction> getPredictionsForUser(User user) {
-        User mergedUser = entityManager.find(User.class, user.getId());
+        User mergedUser = entityManager.merge(user);
         return mergedUser.getPredictions();
     }
 }

@@ -11,12 +11,21 @@ import java.util.List;
  * @author Ivan St. Ivanov
  */
 @Stateless
-public class UserService {
+public class UsersService {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     public List<User> getAllUsers() {
         return entityManager.createNamedQuery("getAllUsers", User.class).getResultList();
+    }
+
+    public User storeUser(User user) {
+        if (user.getId() == null) {
+            entityManager.persist(user);
+            return user;
+        } else {
+            return entityManager.merge(user);
+        }
     }
 }
