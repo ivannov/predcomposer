@@ -1,18 +1,18 @@
 package com.nosoftskills.predcomposer.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@XmlRootElement
 public class Prediction implements Serializable {
 
 	@Id
@@ -47,6 +47,7 @@ public class Prediction implements Serializable {
         this.id = id;
     }
 
+    @XmlTransient
     public int getVersion() {
         return version;
     }

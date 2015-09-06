@@ -1,10 +1,12 @@
 package com.nosoftskills.predcomposer.prediction;
 
+import com.nosoftskills.predcomposer.alternatives.UserContextAlternative;
 import com.nosoftskills.predcomposer.common.TestData;
 import com.nosoftskills.predcomposer.game.GamesService;
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.model.Prediction;
 import com.nosoftskills.predcomposer.model.User;
+import com.nosoftskills.predcomposer.session.UserContext;
 import com.nosoftskills.predcomposer.user.PasswordHashUtil;
 import com.nosoftskills.predcomposer.user.UsersService;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -39,14 +41,14 @@ public class PredictionsServiceIntegrationTest {
     public static WebArchive createDeployment() {
         WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "predcomposer-test.war")
                 .addClass(PredictionsService.class)
-                .addClass(GameLockedException.class)
-                .addClass(GamesService.class)
-                .addClass(UsersService.class)
-                .addClass(PasswordHashUtil.class)
+                .addClasses(GameLockedException.class, GamesService.class)
+                .addClasses(UsersService.class, PasswordHashUtil.class)
+                .addClasses(UserContextAlternative.class, UserContext.class, TestData.class,
+                        PasswordHashUtil.class)
                 .addPackage(Prediction.class.getPackage())
-                .addClass(TestData.class)
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"),
-                        "META-INF/persistence.xml");
+                        "META-INF/persistence.xml")
+                .addAsWebInfResource("test-beans.xml", "beans.xml");
         System.out.println(webArchive.toString(true));
         return webArchive;
     }

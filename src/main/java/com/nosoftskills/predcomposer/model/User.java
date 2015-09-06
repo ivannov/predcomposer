@@ -12,12 +12,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@XmlRootElement
 @Table(name = "Users")
 @NamedQueries({
         @NamedQuery(name = "findUserByNameAndPassword", query = "SELECT u FROM User u WHERE u.userName = :userName AND u.password = :password"),
@@ -85,6 +88,7 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
+    @XmlTransient
 	public int getVersion() {
 		return version;
 	}
@@ -101,6 +105,7 @@ public class User implements Serializable {
 		this.userName = userName;
 	}
 
+    @XmlTransient
 	public String getPassword() {
 		return password;
 	}
@@ -141,6 +146,7 @@ public class User implements Serializable {
 		this.isAdmin = admin;
 	}
 
+    @XmlTransient
     public Set<Prediction> getPredictions() {
         return this.predictions;
     }

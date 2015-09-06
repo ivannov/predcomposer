@@ -10,6 +10,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@XmlRootElement
 @NamedQueries({
         @NamedQuery(name = "getRecentGames", query = "SELECT g from Game g WHERE g.gameTime <= :kickoffTime AND g.locked = FALSE")
 })
@@ -73,6 +76,7 @@ public class Game implements Serializable, Comparable<Game> {
         this.id = id;
     }
 
+    @XmlTransient
     public int getVersion() {
         return version;
     }
@@ -117,6 +121,7 @@ public class Game implements Serializable, Comparable<Game> {
         this.gameTime = gameTime;
     }
 
+    @XmlTransient
     public Set<Prediction> getPredictions() {
         return predictions;
     }

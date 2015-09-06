@@ -19,6 +19,8 @@
         <arquillian-core-version>1.1.9.Final</arquillian-core-version>
         <wildfly-version>9.0.1.Final</wildfly-version>
         <arquillian-wildfly-container-version>8.2.1.Final</arquillian-wildfly-container-version>
+        <jersey-client-version>2.21</jersey-client-version>
+        <javax-json-version>1.0.4</javax-json-version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -156,6 +158,18 @@
                     <groupId>org.wildfly</groupId>
                     <artifactId>wildfly-arquillian-container-managed</artifactId>
                     <version>${arquillian-wildfly-container-version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.glassfish.jersey.core</groupId>
+                    <artifactId>jersey-client</artifactId>
+                    <version>${jersey-client-version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.glassfish</groupId>
+                    <artifactId>javax.json</artifactId>
+                    <version>${javax-json-version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>

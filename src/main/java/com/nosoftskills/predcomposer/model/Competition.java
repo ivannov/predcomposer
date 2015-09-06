@@ -8,12 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@XmlRootElement
 public class Competition implements Serializable {
 
 	@Id
@@ -51,6 +54,7 @@ public class Competition implements Serializable {
         this.id = id;
     }
 
+    @XmlTransient
     public int getVersion() {
         return version;
     }
@@ -75,6 +79,7 @@ public class Competition implements Serializable {
         this.description = description;
     }
 
+    @XmlTransient
     public Set<Game> getGames() {
         return games;
     }

@@ -1,8 +1,10 @@
 package com.nosoftskills.predcomposer.game;
 
 import com.nosoftskills.predcomposer.model.Game;
+import com.nosoftskills.predcomposer.session.UserContext;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
@@ -16,6 +18,13 @@ public class GamesService implements Serializable {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Inject
+    private UserContext userContext;
+
+    public Game findGameById(Long gameId) {
+        return entityManager.find(Game.class, gameId);
+    }
+
     public Game toggleLockedMode(Game game) {
         Game changedGame = entityManager.merge(game);
         changedGame.setLocked(!game.isLocked());
@@ -24,6 +33,7 @@ public class GamesService implements Serializable {
 
     public Game storeGame(Game game) {
         if (game.getId() == null) {
+            userContext.getSelectedCompetition().getGames().add(game);
             entityManager.persist(game);
             return game;
         } else {

@@ -1,6 +1,6 @@
 package com.nosoftskills.predcomposer.game;
 
-import com.nosoftskills.predcomposer.competition.CompetitionService;
+import com.nosoftskills.predcomposer.competition.CompetitionsService;
 import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.session.UserContext;
@@ -32,12 +32,12 @@ public class ViewGamesBean {
     private UserContext userContext;
 
     @Inject
-    private CompetitionService competitionService;
+    private CompetitionsService competitionsService;
 
     @PostConstruct
     public void loadGames() {
         Competition selectedCompetition = userContext.getSelectedCompetition();
-        Set<Game> games = competitionService.getGamesForCompetition(selectedCompetition);
+        Set<Game> games = competitionsService.getGamesForCompetition(selectedCompetition);
         games.forEach(game -> gamesMap.put(game.getId(), game));
     }
 

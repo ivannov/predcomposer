@@ -24,7 +24,7 @@ public class PredictionsService implements Serializable {
         return entityManager.find(Prediction.class, id);
     }
 
-    public void store(Prediction prediction) throws GameLockedException {
+    public Prediction store(Prediction prediction) throws GameLockedException {
         final GameLockedException gameLockedException = new GameLockedException(
                 "The game " + prediction.getForGame().getHomeTeam() + " - " +
                         prediction.getForGame().getAwayTeam() + " was locked before you submitted your proposal.");
@@ -44,9 +44,9 @@ public class PredictionsService implements Serializable {
             User mergedUser = entityManager.merge(prediction.getByUser());
             mergedUser.getPredictions().add(prediction);
             prediction.setByUser(mergedUser);
-
+            return prediction;
         } else {
-            entityManager.merge(prediction);
+            return entityManager.merge(prediction);
         }
     }
 

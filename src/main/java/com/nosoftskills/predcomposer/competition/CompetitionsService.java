@@ -12,10 +12,23 @@ import java.util.Set;
  * @author Ivan St. Ivanov
  */
 @Stateless
-public class CompetitionService {
+public class CompetitionsService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    public Competition findCompetitionById(Long competitionId) {
+        return entityManager.find(Competition.class, competitionId);
+    }
+
+    public Competition storeCompetition(Competition competition) {
+        if (competition.getId() == null) {
+            entityManager.persist(competition);
+            return competition;
+        } else {
+            return entityManager.merge(competition);
+        }
+    }
 
     public Set<Game> getGamesForCompetition(Competition selectedCompetition) {
         Competition mergedCompetition = entityManager.merge(selectedCompetition);
