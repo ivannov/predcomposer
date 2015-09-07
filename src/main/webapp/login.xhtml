@@ -10,15 +10,16 @@
 </h:head>
 
 <h:body>
-    <h:form>
-        <h3>Login</h3>
-        <h:outputText value="User name"/>
+    <h3>Login</h3>
+    <h:messages/>
+    <h:form id="loginForm">
+        <h:panelGrid columns="2">
+        <h:outputLabel for="userName">User name:</h:outputLabel>
         <h:inputText value="#{login.userName}" id="userName"/>
-        <br/><br/>
-        <h:outputText value="Password"/>
+        <h:outputLabel for="password">Password:</h:outputLabel>
         <h:inputSecret value="#{login.password}" id="password"/>
-        <br/><br/>
-        <h:commandButton value="Login" action="#{login.login}"/>
+        <h:commandButton id="login" value="Login" action="#{login.login}"/>
+        </h:panelGrid>
     </h:form>
 </h:body>
 

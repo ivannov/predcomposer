@@ -6,14 +6,14 @@
 </h:head>
 
 <h:body>
-    <h4><h:outputText value="Hello, #{userContext.loggedUser.firstName}"/></h4>
+    <h4><h:outputText id="greeting" value="Hello, #{userContext.loggedUser.firstName}"/></h4>
     <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
     <p/>
     <h1>Options</h1>
     <h:outputLink value="futureGames.xhtml">Predict a match</h:outputLink><br/>
     <h:outputLink value="completedGames.xhtml">Completed matches</h:outputLink><br/>
     <h:outputLink value="rankings.xhtml">Rankings</h:outputLink><br/>
-    <h:form rendered="#{userContext.loggedUser.isAdmin}"><h:commandLink value="Add new game" action="#{gameEditor.showEditGameForm}"/></h:form>
+    <h:form id="addNewGameForm" rendered="#{userContext.loggedUser.isAdmin}"><h:commandLink value="Add new game" action="#{gameEditor.showEditGameForm}"/></h:form>
 </h:body>
 
 </html>
