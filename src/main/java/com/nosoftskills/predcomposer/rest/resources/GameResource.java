@@ -61,7 +61,7 @@ public class GameResource {
             game.setResult(homeTeamScore + ":" + awayTeamScore);
         }
         game.setLocked(locked);
-        Game storedGame = gamesService.storeGame(game);
+        Game storedGame = gamesService.storeGame(game, userContext.getSelectedCompetition());
         return Response.created(URI.create(GAME_RESOURCE_ROOT + "/" + storedGame.getId()))
                 .type(MediaType.APPLICATION_JSON_TYPE)
                 .entity(storedGame)

@@ -1,5 +1,6 @@
 package com.nosoftskills.predcomposer.game;
 
+import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.session.UserContext;
 
@@ -15,13 +16,10 @@ import java.io.Serializable;
 @Stateless
 public class GamesService implements Serializable {
 
-    private static final long serialVersionUID = 6035881016530481758L;
+    private static final long serialVersionUID = -6809263012190548690L;
 
     @PersistenceContext
-    private EntityManager entityManager;
-
-    @Inject
-    private UserContext userContext;
+    EntityManager entityManager;
 
     public Game findGameById(Long gameId) {
         return entityManager.find(Game.class, gameId);
@@ -33,9 +31,9 @@ public class GamesService implements Serializable {
         return changedGame;
     }
 
-    public Game storeGame(Game game) {
+    public Game storeGame(Game game, Competition competition) {
         if (game.getId() == null) {
-            userContext.getSelectedCompetition().getGames().add(game);
+            competition.getGames().add(game);
             entityManager.persist(game);
             return game;
         } else {

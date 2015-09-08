@@ -45,7 +45,7 @@ public class CompetitionsServiceIntegrationTest {
 
     @Test
     @InSequence(1)
-    public void shouldCreatePrediction() throws Exception {
+    public void shouldCreateCompetition() throws Exception {
         testCompetition = new Competition("Premiership 2015/2016", "English Premier League");
         testGame = new Game("Manchester City", "Juventus", LocalDateTime.of(2015, 9, 15, 21, 45));
         testCompetition.getGames().add(testGame);

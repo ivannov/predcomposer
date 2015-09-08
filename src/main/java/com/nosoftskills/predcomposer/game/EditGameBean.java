@@ -198,7 +198,7 @@ public class EditGameBean implements Serializable {
             theGame.setResult(homeTeamScore + ":" + awayTeamScore);
         }
 
-        gamesService.storeGame(theGame);
+        gamesService.storeGame(theGame, userContext.getSelectedCompetition());
         gameEvent.fire(theGame);
         conversation.end();
         return "/futureGames";

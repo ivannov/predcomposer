@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * @author Ivan St. Ivanov
  */
-@WebFilter(urlPatterns = { "*.xhtml" })
+@WebFilter(urlPatterns = { "*.jsf", "*.xhtml", "*.faces" })
 public class LoggedUserFilter implements Filter {
 
     @Inject

@@ -1,5 +1,6 @@
 package com.nosoftskills.predcomposer.browser.pages;
 
+import org.jboss.arquillian.graphene.page.Location;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +11,7 @@ import static org.junit.Assert.fail;
 /**
  * @author Ivan St. Ivanov
  */
-//@Location("home.xhtml")
+@Location("home.jsf")
 public class HomePage {
 
     @FindBy

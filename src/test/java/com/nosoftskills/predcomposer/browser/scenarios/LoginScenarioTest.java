@@ -31,15 +31,18 @@ public class LoginScenarioTest {
     @Page
     private HomePage homePage;
 
+    @Page
+    private LoginPage loginPage;
+
     @Test
-    public void successfulLoginWithAdminUser(@InitialPage LoginPage loginPage) {
+    public void shouldSayHelloUponSuccessfulLogin(@InitialPage LoginPage loginPage) {
         loginPage.login("ivan", "ivan");
         homePage.assertGreetingMessage("Ivan");
         homePage.assertGameFormVisible(true);
     }
 
     @Test
-    public void successfulLoginWithNonAdminUser(@InitialPage LoginPage loginPage) {
+    public void shouldNotAllowCreatingGamesToNonAdmin(@InitialPage LoginPage loginPage) {
         loginPage.login("koko", "koko");
         System.out.println(browser.getPageSource());
         homePage.assertGreetingMessage("Koko");
@@ -47,8 +50,14 @@ public class LoginScenarioTest {
     }
 
     @Test
-    public void unsuccessfulLogin(@InitialPage LoginPage loginPage) {
+    public void shouldShowWrongCredentialsMessageUponUnsuccessfulLogin(@InitialPage LoginPage loginPage) {
         loginPage.login("ivan", "");
         loginPage.assertWrongCredentialsMessage();
+    }
+
+    @Test
+    public void shouldLoadLoginPageIfNotLoggedIn(@InitialPage HomePage homePage) throws Exception {
+        System.out.println(browser.getPageSource());
+        loginPage.assertIsLoaded();
     }
 }

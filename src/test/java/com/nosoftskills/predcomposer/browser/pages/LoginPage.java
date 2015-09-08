@@ -34,4 +34,8 @@ public class LoginPage {
     public void assertWrongCredentialsMessage() {
         assertTrue(facesMessage.isDisplayed());
     }
+
+    public void assertIsLoaded() {
+        assertTrue(this.userName.isDisplayed());
+    }
 }
