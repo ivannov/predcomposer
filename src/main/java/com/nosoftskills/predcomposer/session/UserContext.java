@@ -15,6 +15,8 @@ import java.io.Serializable;
 @Named("userContext")
 public class UserContext implements Serializable {
 
+    private static final long serialVersionUID = -1047249575365658031L;
+
     public Competition getSelectedCompetition() {
         return TestDataInserter.DEFAULT_COMPETITION;
     }

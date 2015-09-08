@@ -15,6 +15,8 @@ import java.io.Serializable;
 @Stateless
 public class GamesService implements Serializable {
 
+    private static final long serialVersionUID = 6035881016530481758L;
+
     @PersistenceContext
     private EntityManager entityManager;
 

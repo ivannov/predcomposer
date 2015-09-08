@@ -19,7 +19,9 @@ import java.util.Set;
 @XmlRootElement
 public class Competition implements Serializable {
 
-	@Id
+    private static final long serialVersionUID = 7251381689096178933L;
+
+    @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 

@@ -20,6 +20,8 @@ import java.util.Set;
 @SessionScoped
 public class ViewUserPredictionsBean implements Serializable {
 
+    private static final long serialVersionUID = -7671166619622273176L;
+
     private Map<Long, Prediction> userPredictions = new HashMap<>();
 
     @Inject

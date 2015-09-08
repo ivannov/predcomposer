@@ -28,6 +28,8 @@ import java.util.Set;
 })
 public class User implements Serializable {
 
+	private static final long serialVersionUID = -3718072367022295097L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

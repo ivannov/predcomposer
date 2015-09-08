@@ -17,6 +17,8 @@ import java.util.Set;
 @Stateless
 public class PredictionsService implements Serializable {
 
+    private static final long serialVersionUID = 8611021799401099994L;
+
     @PersistenceContext
     EntityManager entityManager;
 

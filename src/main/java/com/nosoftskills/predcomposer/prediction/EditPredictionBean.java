@@ -20,6 +20,8 @@ import java.io.Serializable;
 @ConversationScoped
 public class EditPredictionBean implements Serializable {
 
+    private static final long serialVersionUID = -5740178845665660243L;
+
     private Game predictedGame;
     private String homeTeamPredictedGoals;
     private String awayTeamPredictedGoals;

@@ -22,6 +22,8 @@ import java.util.Map;
 @ConversationScoped
 public class EditGameBean implements Serializable {
 
+    private static final long serialVersionUID = -8375226295834348516L;
+
     private Game theGame;
 
     @Inject

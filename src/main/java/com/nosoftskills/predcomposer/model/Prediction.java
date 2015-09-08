@@ -15,7 +15,9 @@ import java.util.Objects;
 @XmlRootElement
 public class Prediction implements Serializable {
 
-	@Id
+    private static final long serialVersionUID = -5531972294380467582L;
+
+    @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 

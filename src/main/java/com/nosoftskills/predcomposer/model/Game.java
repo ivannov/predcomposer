@@ -26,6 +26,8 @@ import java.util.Set;
 })
 public class Game implements Serializable, Comparable<Game> {
 
+    private static final long serialVersionUID = -7167764360968863333L;
+
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
             "dd MMM, HH:mm");
 
