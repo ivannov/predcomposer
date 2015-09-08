@@ -1,6 +1,6 @@
 package com.nosoftskills.predcomposer.prediction;
 
-import com.nosoftskills.predcomposer.alternatives.PredictionServiceAlternative;
+import com.nosoftskills.predcomposer.alternatives.PredictionsServiceAlternative;
 import com.nosoftskills.predcomposer.alternatives.UserContextAlternative;
 import com.nosoftskills.predcomposer.model.Prediction;
 import org.jglue.cdiunit.ActivatedAlternatives;
@@ -25,7 +25,7 @@ import static com.nosoftskills.predcomposer.common.TestData.generateEntityIds;
  */
 @RunWith(CdiRunner.class)
 @ActivatedAlternatives({
-        PredictionServiceAlternative.class, UserContextAlternative.class
+        PredictionsServiceAlternative.class, UserContextAlternative.class
 })
 public class ViewUserPredictionsBeanTest {
 

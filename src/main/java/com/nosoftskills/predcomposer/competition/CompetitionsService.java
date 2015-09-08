@@ -15,7 +15,7 @@ import java.util.Set;
 public class CompetitionsService {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
     public Competition findCompetitionById(Long competitionId) {
         return entityManager.find(Competition.class, competitionId);

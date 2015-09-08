@@ -1,4 +1,4 @@
-package com.nosoftskills.predcomposer.browser;
+package com.nosoftskills.predcomposer.browser.scenarios;
 
 import com.nosoftskills.predcomposer.browser.pages.HomePage;
 import com.nosoftskills.predcomposer.browser.pages.LoginPage;

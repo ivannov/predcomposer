@@ -1,4 +1,4 @@
-package com.nosoftskills.predcomposer.browser;
+package com.nosoftskills.predcomposer.browser.scenarios;
 
 import com.nosoftskills.predcomposer.competition.CompetitionsService;
 import com.nosoftskills.predcomposer.game.GamesService;

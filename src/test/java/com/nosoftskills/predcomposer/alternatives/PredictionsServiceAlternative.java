@@ -20,7 +20,7 @@ import static com.nosoftskills.predcomposer.common.TestData.prediction3;
  * @author Ivan St. Ivanov
  */
 @Alternative
-public class PredictionServiceAlternative extends PredictionsService {
+public class PredictionsServiceAlternative extends PredictionsService {
 
     private static Set<Prediction> ivansPredictions = new HashSet<>();
     private static Set<Prediction> kokosPredictions = new HashSet<>();
