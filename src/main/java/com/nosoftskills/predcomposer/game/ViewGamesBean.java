@@ -7,9 +7,11 @@ import com.nosoftskills.predcomposer.session.UserContext;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -23,8 +25,10 @@ import java.util.stream.Collectors;
  * @author Ivan St. Ivanov
  */
 @Named("gamesViewer")
-@ApplicationScoped
-public class ViewGamesBean {
+@SessionScoped
+public class ViewGamesBean implements Serializable {
+
+    private static final long serialVersionUID = 6679417224932159707L;
 
     private Map<Long, Game> gamesMap = new TreeMap<>(Comparator.reverseOrder());
 

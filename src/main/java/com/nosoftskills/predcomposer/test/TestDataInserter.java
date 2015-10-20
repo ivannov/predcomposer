@@ -29,6 +29,12 @@ public class TestDataInserter {
 
     @PostConstruct
     public void insertTestData() {
+        if (entityManager.find(AutoInsert.class, 1) == null) {
+            entityManager.persist(new AutoInsert(1));
+        } else {
+            System.out.println("Data already inserted");
+            return;
+        }
         User user1 = new User("ivan", hashPassword("ivan"), "ivan@example.com", "Ivan", "Ivanov", true);
         User user2 = new User("koko", hashPassword("koko"), "koko@example.com", "Koko", "Stefanov", false);
 

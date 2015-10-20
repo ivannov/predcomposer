@@ -34,7 +34,7 @@ public class CompetitionsServiceIntegrationTest {
         WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "predcomposer-test.war")
                 .addClass(CompetitionsService.class)
                 .addPackage(Prediction.class.getPackage())
-                .addAsResource(new File("src/main/resources/META-INF/persistence.xml"),
+                .addAsResource(new File("src/test/resources/META-INF/persistence-scenarios.xml"),
                         "META-INF/persistence.xml");
         System.out.println(webArchive.toString(true));
         return webArchive;

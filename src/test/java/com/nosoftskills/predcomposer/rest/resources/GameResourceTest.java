@@ -53,7 +53,7 @@ public class GameResourceTest {
                 .addClasses(UserContextAlternative.class, UserContext.class, TestData.class,
                         PasswordHashUtil.class)
                 .addPackage(Game.class.getPackage())
-                .addAsResource(new File("src/main/resources/META-INF/persistence.xml"),
+                .addAsResource(new File("src/test/resources/META-INF/persistence-scenarios.xml"),
                         "META-INF/persistence.xml")
                 .addAsWebInfResource("test-beans.xml", "beans.xml");
         System.out.println(webArchive.toString(true));
@@ -64,7 +64,7 @@ public class GameResourceTest {
 
     @Test
     @InSequence(1)
-    public void shouldCreatedGame(@ArquillianResource URL base) throws Exception {
+    public void shouldCreateGame(@ArquillianResource URL base) throws Exception {
         URL url = new URL(base, "rest/game");
         WebTarget target = ClientBuilder.newClient().target(url.toExternalForm());
         Form newGameForm = buildForm(false, false);

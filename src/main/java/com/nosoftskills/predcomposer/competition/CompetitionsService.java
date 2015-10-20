@@ -6,13 +6,16 @@ import com.nosoftskills.predcomposer.model.Game;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * @author Ivan St. Ivanov
  */
 @Stateless
-public class CompetitionsService {
+public class CompetitionsService implements Serializable {
+
+    private static final long serialVersionUID = 7432416155835050214L;
 
     @PersistenceContext
     EntityManager entityManager;

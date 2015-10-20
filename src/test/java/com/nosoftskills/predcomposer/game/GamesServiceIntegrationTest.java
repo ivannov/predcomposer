@@ -42,7 +42,7 @@ public class GamesServiceIntegrationTest {
                 .addClasses(UserContextAlternative.class, UserContext.class, TestData.class,
                         PasswordHashUtil.class)
                 .addPackage(Game.class.getPackage())
-                .addAsResource(new File("src/main/resources/META-INF/persistence.xml"),
+                .addAsResource(new File("src/test/resources/META-INF/persistence-scenarios.xml"),
                         "META-INF/persistence.xml")
                 .addAsWebInfResource("test-beans.xml", "beans.xml");
         System.out.println(webArchive.toString(true));

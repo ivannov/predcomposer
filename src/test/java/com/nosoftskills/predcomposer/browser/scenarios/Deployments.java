@@ -32,7 +32,7 @@ public class Deployments {
                         PredictionsService.class.getPackage(), Score.class.getPackage(),
                         UserContext.class.getPackage(), TestDataInserter.class.getPackage(),
                         UsersService.class.getPackage(), LoggedUserFilter.class.getPackage())
-                .addAsResource(new File("src/main/resources/META-INF/persistence.xml"),
+                .addAsResource(new File("src/test/resources/META-INF/persistence-scenarios.xml"),
                         "META-INF/persistence.xml")
                 .merge(getWebPagesArchive(), "/", Filters.include(".*\\.xhtml$"))
                 .addAsWebResource(new File(WEBAPP_DIR, "login.xhtml"))
