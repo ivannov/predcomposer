@@ -9,7 +9,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -22,19 +24,26 @@ import static com.nosoftskills.predcomposer.user.PasswordHashUtil.hashPassword;
 @Startup
 public class TestDataInserter {
 
-    public static final Competition DEFAULT_COMPETITION = new Competition("Champions League 2015-2016");
+    public static final String DEFAULT_COMPETITION_NAME = "Champions League 2015-2016";
+    public static Competition defaultCompetition = null;
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @PostConstruct
     public void insertTestData() {
-        if (entityManager.find(AutoInsert.class, 1) == null) {
-            entityManager.persist(new AutoInsert(1));
-        } else {
-            System.out.println("Data already inserted");
+
+        TypedQuery<Competition> query = entityManager.createNamedQuery("findCompetitionByName", Competition.class);
+        query.setParameter("competitionName", DEFAULT_COMPETITION_NAME);
+
+        try {
+            defaultCompetition = query.getSingleResult();
+            System.out.println("Data was already inserted");
             return;
+        } catch (NoResultException nre) {
+            System.out.printf("Application starting for the first time. Inserting data");
         }
+
         User user1 = new User("ivan", hashPassword("ivan"), "ivan@example.com", "Ivan", "Ivanov", true);
         User user2 = new User("koko", hashPassword("koko"), "koko@example.com", "Koko", "Stefanov", false);
 
@@ -59,8 +68,9 @@ public class TestDataInserter {
         game2.getPredictions().addAll(Arrays.asList(prediction1, prediction2));
         game3.getPredictions().add(prediction3);
 
-        DEFAULT_COMPETITION.getGames().addAll(
+        defaultCompetition = new Competition(DEFAULT_COMPETITION_NAME);
+        defaultCompetition.getGames().addAll(
                 Arrays.asList(game1, game2, game3, game4, game5, game6));
-        entityManager.persist(DEFAULT_COMPETITION);
+        entityManager.persist(defaultCompetition);
     }
 }

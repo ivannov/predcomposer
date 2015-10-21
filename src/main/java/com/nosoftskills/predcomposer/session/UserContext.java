@@ -18,7 +18,7 @@ public class UserContext implements Serializable {
     private static final long serialVersionUID = -1047249575365658031L;
 
     public Competition getSelectedCompetition() {
-        return TestDataInserter.DEFAULT_COMPETITION;
+        return TestDataInserter.defaultCompetition;
     }
 
     private User loggedUser;

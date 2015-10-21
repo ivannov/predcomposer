@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,6 +19,9 @@ import java.util.Set;
 
 @Entity
 @XmlRootElement
+@NamedQueries({
+        @NamedQuery(name = "findCompetitionByName", query = "SELECT c FROM Competition c WHERE c.name = :competitionName"),
+})
 public class Competition implements Serializable {
 
     private static final long serialVersionUID = 7251381689096178933L;
