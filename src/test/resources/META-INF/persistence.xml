@@ -13,7 +13,7 @@ http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:testdb"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
-            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.scripts.drop-target" value="/tmp/drop.ddl"/>
             <property name="javax.persistence.schema-generation.scripts.create-target" value="/tmp/create.ddl"/>
