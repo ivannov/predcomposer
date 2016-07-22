@@ -1,0 +1,62 @@
+= Predictions Composer
+
+A Java EE 7 website, that gathers friends who give predictions for upcoming football matches.
+They gain points based on their successful predictions.
+
+This project is also a showcase for different types of tests in Java EE Project.
+
+== Running the application
+
+The following instructions are for running the prediction composer on Linux, WildFly application server and MySQL database:
+
+* Download http://wildfly.org/downloads/[WildFly] and extract it somewhere
+
+* Export the directory where you extracted the server as $JBOSS_HOME: `export JBOSS_HOME=<the-dir>`
+
+* Download and install http://dev.mysql.com/downloads/mysql/[My SQL Server]
+
+* Download the https://dev.mysql.com/downloads/connector/j/[MySQL connector jar].
+You are going to use it later when you create a JDBC data source in WildFly
+
+* Make sure that MySQL is running and connect to it: `mysql -u root -p`
+
+* Create the application database and user:
+
+[source,bash]
+----
+create database predcomposer;
+create user 'predcomposer'@'%' identified by 'predcomposer';
+grant all privileges on predcomposer.* to 'predcomposer'@'%';
+source docs/create.ddl;
+----
+
+* Start the wildfly application server: `$JBOSS_HOME/bin/standalone.sh`
+
+* Run the JBOSS CLI to create the JDBC data source: `$JBOSS_HOME/bin/jboss-cli.sh`
+
+* Execute the following commands there to create the datasource:
+
+[source,bash]
+----
+# Connect to the server
+connect
+
+# "Deploy" the mysql connector as module
+# Replace <connector-jar-location> with the actual path on your machine, e.g. ~/Downloads/mysql-connector-java-5.1.38-bin.jar
+module add --name=com.mysql --resources=<connector-jar-location> --dependencies=javax.api,javax.transaction.api
+
+# Register the driver
+/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource)
+
+# Create the Data Source
+data-source add --name=mysqlDS --driver-name=mysql --jndi-name=java:jboss/datasources/PredComposerMySQLDS --connection-url=jdbc:mysql://localhost:3306/predcomposer?useSSL=false --user-name=predcomposer --password=predcomposer --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
+
+# Exit the command line interface
+exit
+----
+
+* Build this project and copy the target/predcomposer.war file to $JBOSS_HOME/standalone/deployments directory
+
+* Open the web app at http://localhost:8080/predcomposer
+
+* Log in with user name _ivan_ and password _ivan_

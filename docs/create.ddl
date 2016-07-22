@@ -1,0 +1,13 @@
+use predcomposer;
+create table Competition (id bigint not null, description varchar(255), name varchar(255) not null, version integer not null, primary key (id));
+create table Competition_Game (Competition_id bigint not null, games_id bigint not null, primary key (Competition_id, games_id));
+create table Game (id bigint not null, awayTeam varchar(255) not null, gameTime datetime not null, homeTeam varchar(255) not null, locked bit not null, result varchar(255), version integer not null, primary key (id));
+create table Prediction (id bigint not null, predictedResult varchar(255), version integer not null, byUser_id bigint, forGame_id bigint, primary key (id));
+create table Users (id bigint not null, avatar longblob, email varchar(255) not null, firstName varchar(255), isAdmin bit not null, lastName varchar(255), password varchar(255) not null, userName varchar(255) not null, version integer not null, primary key (id));
+alter table Competition_Game add constraint UK_o36v8rjommderfxrq33gi6tuf  unique (games_id);
+alter table Competition_Game add constraint FK_o36v8rjommderfxrq33gi6tuf foreign key (games_id) references Game (id);
+alter table Competition_Game add constraint FK_kf903pfrt518gp7429x5hyhsp foreign key (Competition_id) references Competition (id);
+alter table Prediction add constraint FK_6q7pkahcan4ksga1lw92ppgmo foreign key (byUser_id) references Users (id);
+alter table Prediction add constraint FK_lijvpstxoprli76glxb32o2fk foreign key (forGame_id) references Game (id);
+create table hibernate_sequence ( next_val bigint );
+insert into hibernate_sequence values ( 1 );
