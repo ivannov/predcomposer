@@ -1,36 +1,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-<h:head>
-    <title>Predictions composer</title>
-</h:head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<h:body>
-    <h4><h:outputText value="Hello, #{userContext.loggedUser.firstName}"/></h4>
-    <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
-    <p/>
-    <h1>Give a prediction</h1>
-    <h:form>
-        <table>
-            <tr>
-                <td><h:outputText value="#{predictionEditor.homeTeam}"/></td>
-                <td>-</td>
-                <td><h:outputText value="#{predictionEditor.awayTeam}"/></td>
-            </tr>
-            <tr>
-                <td><h:inputText value="#{predictionEditor.homeTeamPredictedGoals}"/></td>
-                <td>:</td>
-                <td><h:inputText value="#{predictionEditor.awayTeamPredictedGoals}"/></td>
-            </tr>
-            <tr>
-                <td/><td/>
-                <td>
-                    <h:commandButton value="Submit" action="#{predictionEditor.submitPrediction}"/>
-                </td>
-            </tr>
-        </table>
-    </h:form>
-</h:body>
+<ui:composition template="mainLayout.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <h:commandLink value="logout" action="#{login.logout}"/>
+        </h:form>
+        <p/>
+        <h1>Give a prediction</h1>
+        <h:form>
+            <table>
+                <tr>
+                    <td>
+                        <h:outputText value="#{predictionEditor.homeTeam}"/>
+                    </td>
+                    <td>-</td>
+                    <td>
+                        <h:outputText value="#{predictionEditor.awayTeam}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:inputText value="#{predictionEditor.homeTeamPredictedGoals}"/>
+                    </td>
+                    <td>:</td>
+                    <td>
+                        <h:inputText value="#{predictionEditor.awayTeamPredictedGoals}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td/>
+                    <td/>
+                    <td>
+                        <h:commandButton value="Submit" action="#{predictionEditor.submitPrediction}"/>
+                    </td>
+                </tr>
+            </table>
+        </h:form>
+    </ui:define>
+</ui:composition>
 
 </html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Predictions composer</title>
+</h:head>
+<h:body>
+    <h4>
+        <h:outputText id="greeting" value="Hello, #{userContext.loggedUser.firstName}"/>
+    </h4>
+    <h:form>
+        <h:commandLink value="logout" action="#{login.logout}"/>
+    </h:form>
+    <p/>
+    <ui:insert name="content">Page content</ui:insert>
+</h:body>
+</html>

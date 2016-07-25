@@ -1,19 +1,16 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<h:head>
-    <title>Predictions composer</title>
-</h:head>
-
-<h:body>
-    <h4><h:outputText id="greeting" value="Hello, #{userContext.loggedUser.firstName}"/></h4>
-    <h:form><h:commandLink value="logout" action="#{login.logout}"/></h:form>
-    <p/>
-    <h1>Options</h1>
-    <h:outputLink value="futureGames.xhtml">Predict a match</h:outputLink><br/>
-    <h:outputLink value="completedGames.xhtml">Completed matches</h:outputLink><br/>
-    <h:outputLink value="rankings.xhtml">Rankings</h:outputLink><br/>
-    <h:form id="addNewGameForm" rendered="#{userContext.loggedUser.isAdmin}"><h:commandLink value="Add new game" action="#{gameEditor.showEditGameForm}"/></h:form>
-</h:body>
+<ui:composition template="mainLayout.xhtml">
+    <ui:define name="content">
+        <h1>Options</h1>
+        <h:outputLink value="futureGames.xhtml">Predict a match</h:outputLink><br/>
+        <h:outputLink value="completedGames.xhtml">Completed matches</h:outputLink><br/>
+        <h:outputLink value="rankings.xhtml">Rankings</h:outputLink><br/>
+        <h:form id="addNewGameForm" rendered="#{userContext.loggedUser.isAdmin}"><h:commandLink value="Add new game" action="#{gameEditor.showEditGameForm}"/></h:form>
+    </ui:define>
+</ui:composition>
 
 </html>
