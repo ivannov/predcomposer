@@ -3,23 +3,23 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Predictions composer</title>
 </h:head>
 
 <h:body>
-    <h3>Login</h3>
+    <p:outputLabel>Welcome to Prediction composer</p:outputLabel>
     <h:messages/>
     <h:form id="loginForm">
-        <h:panelGrid columns="2">
-        <h:outputLabel for="userName">User name:</h:outputLabel>
-        <h:inputText value="#{login.userName}" id="userName"/>
-        <h:outputLabel for="password">Password:</h:outputLabel>
-        <h:inputSecret value="#{login.password}" id="password"/>
-        <h:commandButton id="login" value="Login" action="#{login.login}"/>
-        </h:panelGrid>
+        <p:panelGrid columns="2">
+        <p:outputLabel for="userName">User name:</p:outputLabel>
+        <p:inputText value="#{login.userName}" id="userName"/>
+        <p:outputLabel for="password">Password:</p:outputLabel>
+        <p:password value="#{login.password}" id="password"/>
+        <p:commandButton id="login" value="Login" action="#{login.login}" style="float:right;"/>
+        </p:panelGrid>
     </h:form>
 </h:body>
 

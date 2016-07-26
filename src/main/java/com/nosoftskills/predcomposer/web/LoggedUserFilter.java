@@ -35,7 +35,9 @@ public class LoggedUserFilter implements Filter {
         String reqURI = ((HttpServletRequest) request).getRequestURI();
         User loggedUser = userContext.getLoggedUser();
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        if (!reqURI.contains("login.xhtml") && loggedUser == null) {
+        if (reqURI.contains("javax.faces.resource") || reqURI.contains("login.xhtml")) {
+            chain.doFilter(request, response);
+        } else if (loggedUser == null) {
             httpServletResponse.sendRedirect("login.xhtml");
         } else if (reqURI.contains("admin/") && !loggedUser.getIsAdmin()) {
             httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
