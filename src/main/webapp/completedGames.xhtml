@@ -5,32 +5,56 @@
 
 <ui:composition template="mainLayout.xhtml">
     <ui:define name="content">
-
-        <h1>Completed games</h1>
-        <h:dataTable value="#{gamesViewer.completedGames}" var="g">
-            <h:column>
-                <f:facet name="header">Home team</f:facet>
-                <h:outputText value="#{g.homeTeam}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Away team</f:facet>
-                <h:outputText value="#{g.awayTeam}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Result</f:facet>
-                <h:form>
-                    <h:commandLink value="#{g.result}" action="#{gamePredictionsViewer.showGamePredictions(g)}"/>
-                </h:form>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Game time</f:facet>
-                <h:outputText value="#{g.gameTimeFormatted}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Prediction</f:facet>
-                <h:outputText value="#{userPredictionsViewer.userPredictions[g.id].predictedResult}"/>
-            </h:column>
-        </h:dataTable>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Completed games</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <h:dataTable value="#{gamesViewer.completedGames}" var="g"
+                                             class="table table-striped table-bordered table-hover">
+                                    <h:column>
+                                        <f:facet name="header">Home team</f:facet>
+                                        <h:outputText value="#{g.homeTeam}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Away team</f:facet>
+                                        <h:outputText value="#{g.awayTeam}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Result</f:facet>
+                                        <h:form>
+                                            <h:commandLink value="#{g.result}"
+                                                           action="#{gamePredictionsViewer.showGamePredictions(g)}"/>
+                                        </h:form>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Game time</f:facet>
+                                        <h:outputText value="#{g.gameTimeFormatted}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Prediction</f:facet>
+                                        <h:outputText
+                                                value="#{userPredictionsViewer.userPredictions[g.id].predictedResult}"/>
+                                    </h:column>
+                                    <h:column rendered="#{userContext.loggedUser.isAdmin}">
+                                        <f:facet name="header">Actions</f:facet>
+                                        <h:form>
+                                            <h:commandLink value="Edit" action="#{gameEditor.showEditGameForm(g)}"/>
+                                        </h:form>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>
 </html>

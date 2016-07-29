@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * @author Ivan St. Ivanov
@@ -194,13 +195,21 @@ public class EditGameBean implements Serializable {
         LocalDateTime gameTime = LocalDateTime.of(year, month, day, hours, minutes);
 
         theGame.setGameTime(gameTime);
-        if (homeTeamScore != null && awayTeamScore != null) {
+        if (!empty(homeTeamScore, awayTeamScore)) {
             theGame.setResult(homeTeamScore + ":" + awayTeamScore);
         }
 
         gamesService.storeGame(theGame, userContext.getSelectedCompetition());
         gameEvent.fire(theGame);
         conversation.end();
-        return "/futureGames";
+        return "/futureGames?faces-redirect=true";
+    }
+
+    private boolean empty(String... parameters) {
+        long nonEmptyParametersCount = Stream
+                .of(parameters)
+                .filter(parameter -> parameter != null && parameter.length() > 0)
+                .count();
+        return nonEmptyParametersCount == 0;
     }
 }

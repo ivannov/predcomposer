@@ -37,7 +37,7 @@ public class ViewRankingsBean {
 
     public String recalculate() {
         calculateAllScores();
-        return "rankings";
+        return "home";
     }
 
     private void calculateAllScores() {

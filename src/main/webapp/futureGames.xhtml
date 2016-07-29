@@ -10,48 +10,62 @@
 
 <ui:composition template="mainLayout.xhtml">
     <ui:define name="content">
-        <h:form>
-            <h:commandLink value="Add new game" action="#{gameEditor.showEditGameForm}"
-                           rendered="#{userContext.loggedUser.isAdmin}"/>
-        </h:form>
-        <p/>
-        <h1>The list of all future games</h1>
-        <h:dataTable value="#{gamesViewer.futureGames}" var="g">
-            <h:column>
-                <f:facet name="header">Home team</f:facet>
-                <h:outputText value="#{g.homeTeam}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Away team</f:facet>
-                <h:outputText value="#{g.awayTeam}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Game time</f:facet>
-                <h:outputText value="#{g.gameTimeFormatted}"/>
-            </h:column>
-            <h:column>
-                <c:set var="currentPrediction" value="#{userPredictionsViewer.userPredictions[g.id]}"/>
-                <h:form>
-                    <h:commandLink value="#{currentPrediction == null ? 'Predict' : currentPrediction.predictedResult}"
-                                   action="#{predictionEditor.showPredictionForm(g, currentPrediction)}"
-                                   rendered="#{!g.locked}"/>
-                </h:form>
-                <h:outputText value="#{currentPrediction == null ? 'Locked' : currentPrediction.predictedResult}"
-                              rendered="#{g.locked}"/>
-            </h:column>
-            <h:column>
-                <h:form>
-                    <h:commandLink value="Edit" action="#{gameEditor.showEditGameForm(g)}"
-                                   rendered="#{userContext.loggedUser.isAdmin}"/>
-                </h:form>
-            </h:column>
-            <h:column>
-                <h:form>
-                    <h:commandLink value="#{g.locked ? 'Unlock' : 'Lock'}" action="#{gameLocker.toggleLockMode(g)}"
-                                   rendered="#{userContext.loggedUser.isAdmin}"/>
-                </h:form>
-            </h:column>
-        </h:dataTable>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">The list of all future games</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <h:dataTable value="#{gamesViewer.futureGames}" var="g"
+                                             class="table table-striped table-bordered table-hover">
+                                    <h:column>
+                                        <f:facet name="header">Home team</f:facet>
+                                        <h:outputText value="#{g.homeTeam}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Away team</f:facet>
+                                        <h:outputText value="#{g.awayTeam}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Game time</f:facet>
+                                        <h:outputText value="#{g.gameTimeFormatted}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Action</f:facet>
+                                        <c:set var="currentPrediction"
+                                               value="#{userPredictionsViewer.userPredictions[g.id]}"/>
+                                        <h:form>
+                                            <h:commandLink
+                                                    value="#{currentPrediction == null ? 'Predict' : currentPrediction.predictedResult}"
+                                                    action="#{predictionEditor.showPredictionForm(g, currentPrediction)}"
+                                                    rendered="#{!g.locked}"/>
+                                        </h:form>
+                                        <h:outputText
+                                                value="#{currentPrediction == null ? 'Locked' : currentPrediction.predictedResult}"
+                                                rendered="#{g.locked}"/>
+                                        <h:form>
+                                            <h:commandLink value="Edit" action="#{gameEditor.showEditGameForm(g)}"
+                                                           rendered="#{userContext.loggedUser.isAdmin}"/>
+                                        </h:form>
+                                        <h:form>
+                                            <h:commandLink value="#{g.locked ? 'Unlock' : 'Lock'}"
+                                                           action="#{gameLocker.toggleLockMode(g)}"
+                                                           rendered="#{userContext.loggedUser.isAdmin}"/>
+                                        </h:form>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>
 
