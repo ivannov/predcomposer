@@ -11,6 +11,8 @@
     <link href="css/metisMenu.min.css" rel="stylesheet"/>
     <link href="css/font-awesome.min.css" rel="stylesheet"/>
     <link href="css/sb-admin-2.css" rel="stylesheet"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </h:head>
 <h:body>
     <div id="wrapper">
@@ -23,13 +25,15 @@
                 <h:outputText id="greeting" class="navbar-brand" value="Hello, #{userContext.loggedUser.firstName}"/>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"/>  <i class="fa fa-caret-down"/>
+                        <i class="fa fa-user fa-fw"/> <i class="fa fa-caret-down"/>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <!-- TODO the dropdown doesn't work -->
                         <li>
                             <h:form>
-                                <h:commandLink value="Log out" action="#{login.logout}"/>
+                                <h:commandLink action="#{login.logout}">
+                                    <i class="fa fa-sign-out fa-fw"/> Logout
+                                </h:commandLink>
                             </h:form>
                         </li>
                     </ul>

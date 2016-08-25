@@ -6,40 +6,56 @@
 
 <ui:composition template="mainLayout.xhtml">
     <ui:define name="content">
-        <h:form>
-            <h:commandLink value="logout" action="#{login.logout}"/>
-        </h:form>
-        <p/>
-        <h1>Give a prediction</h1>
-        <h:form>
-            <table>
-                <tr>
-                    <td>
-                        <h:outputText value="#{predictionEditor.homeTeam}"/>
-                    </td>
-                    <td>-</td>
-                    <td>
-                        <h:outputText value="#{predictionEditor.awayTeam}"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h:inputText value="#{predictionEditor.homeTeamPredictedGoals}"/>
-                    </td>
-                    <td>:</td>
-                    <td>
-                        <h:inputText value="#{predictionEditor.awayTeamPredictedGoals}"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td/>
-                    <td>
-                        <h:commandButton value="Submit" action="#{predictionEditor.submitPrediction}"/>
-                    </td>
-                </tr>
-            </table>
-        </h:form>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Give a prediction</h1>
+                </div>
+            </div>
+        <div class="panel-body">
+
+        <h:form role="form">
+            <fieldset>
+                <div class="form-group">
+                    <h:outputText value="#{predictionEditor.homeTeam} - #{predictionEditor.awayTeam}"/>
+                </div>
+                <div class="form-group">
+                    <h:inputText value="#{predictionEditor.homeTeamPredictedGoals}"/>
+                    <h:outputText value=":"/>
+                    <h:inputText value="#{predictionEditor.awayTeamPredictedGoals}"/>
+                </div>
+                <h:commandButton value="Submit" action="#{predictionEditor.submitPrediction}" class="btn btn-lg btn-success btn-block"/>
+            </fieldset>
+                <!--<table>-->
+                    <!--<tr>-->
+                        <!--<td>-->
+                            <!--<h:outputText value="#{predictionEditor.homeTeam}"/>-->
+                        <!--</td>-->
+                        <!--<td>-</td>-->
+                        <!--<td>-->
+                            <!--<h:outputText value="#{predictionEditor.awayTeam}"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>-->
+                            <!--<h:inputText value="#{predictionEditor.homeTeamPredictedGoals}"/>-->
+                        <!--</td>-->
+                        <!--<td>:</td>-->
+                        <!--<td>-->
+                            <!--<h:inputText value="#{predictionEditor.awayTeamPredictedGoals}"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td/>-->
+                        <!--<td/>-->
+                        <!--<td>-->
+                            <!--<h:commandButton value="Submit" action="#{predictionEditor.submitPrediction}"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+            </h:form>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>
 

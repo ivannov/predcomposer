@@ -7,64 +7,70 @@
 
 <ui:composition template="../mainLayout.xhtml">
     <ui:define name="content">
-
-        <h1>Game details</h1>
-        <h:form>
-            <table>
-                <tr>
-                    <td>Home team</td>
-                    <td>
-                        <h:inputText value="#{gameEditor.homeTeam}"/>
-                    </td>
-                    <td>
-                        <h:inputText value="#{gameEditor.homeTeamScore}"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Away team</td>
-                    <td>
-                        <h:inputText value="#{gameEditor.awayTeam}"/>
-                    </td>
-                    <td>
-                        <h:inputText value="#{gameEditor.awayTeamScore}"/>
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td>Date</td>
-                    <td>
-                        <h:inputText value="#{gameEditor.day}">
-                            <f:validateLongRange maximum="31" minimum="1"/>
-                        </h:inputText>
-                    </td>
-                    <td>
-                        <h:selectOneMenu value="#{gameEditor.month}">
-                            <f:selectItems value="#{gameEditor.monthValues}"/>
-                        </h:selectOneMenu>
-                    </td>
-                    <td>
-                        <h:selectOneMenu value="#{gameEditor.year}">
-                            <f:selectItems value="#{gameEditor.yearValues}"/>
-                        </h:selectOneMenu>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Time</td>
-                    <td>
-                        <h:inputText value="#{gameEditor.hours}">
-                            <f:validateLongRange maximum="23" minimum="0"/>
-                        </h:inputText>
-                    </td>
-                    <td>
-                        <h:inputText value="#{gameEditor.minutes}">
-                            <f:validateLongRange maximum="59" minimum="0"/>
-                        </h:inputText>
-                    </td>
-                </tr>
-            </table>
-            <h:commandButton value="Submit" action="#{gameEditor.saveNewGame}"/>
-        </h:form>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Game details</h1>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-lg-8">
+                    <h:form styleClass="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Home team</label>
+                            <div class="col-lg-3">
+                                <h:inputText value="#{gameEditor.homeTeam}" class="form-control"/>
+                            </div>
+                            <div class="col-lg-1">
+                                <h:inputText value="#{gameEditor.homeTeamScore}" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Away team</label>
+                            <div class="col-lg-3">
+                                <h:inputText value="#{gameEditor.awayTeam}" class="form-control"/>
+                            </div>
+                            <div class="col-lg-1">
+                                <h:inputText value="#{gameEditor.awayTeamScore}" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Date</label>
+                            <div class="col-lg-1">
+                                <h:inputText value="#{gameEditor.day}" class="form-control">
+                                    <f:validateLongRange maximum="31" minimum="1"/>
+                                </h:inputText>
+                            </div>
+                            <div class="col-lg-2">
+                                <h:selectOneMenu value="#{gameEditor.month}" class="form-control">
+                                    <f:selectItems value="#{gameEditor.monthValues}"/>
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="col-lg-2">
+                                <h:selectOneMenu value="#{gameEditor.year}" class="form-control">
+                                    <f:selectItems value="#{gameEditor.yearValues}"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Time</label>
+                            <div class="col-lg-1">
+                                <h:inputText value="#{gameEditor.hours}" class="form-control">
+                                    <f:validateLongRange maximum="23" minimum="0"/>
+                                </h:inputText>
+                            </div>
+                            <div class="col-lg-1">
+                                <h:inputText value="#{gameEditor.minutes}" class="form-control">
+                                    <f:validateLongRange maximum="59" minimum="0"/>
+                                </h:inputText>
+                            </div>
+                        </div>
+                        <h:commandButton value="Submit" action="#{gameEditor.saveNewGame}"
+                                         class="btn btn-default"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>
 
