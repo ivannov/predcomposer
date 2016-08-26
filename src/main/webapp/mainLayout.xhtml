@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Predictions composer</title>
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/metisMenu.min.css" rel="stylesheet"/>
     <link href="css/font-awesome.min.css" rel="stylesheet"/>
     <link href="css/sb-admin-2.css" rel="stylesheet"/>
     <script src="js/jquery.min.js"></script>
@@ -28,7 +27,6 @@
                         <i class="fa fa-user fa-fw"/> <i class="fa fa-caret-down"/>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <!-- TODO the dropdown doesn't work -->
                         <li>
                             <h:form>
                                 <h:commandLink action="#{login.logout}">
@@ -53,9 +51,12 @@
                             <h:outputLink value="completedGames.xhtml">Completed matches</h:outputLink>
                         </li>
                         <li>
-                            <!-- TODO The form is not aligned with the links from above -->
                             <h:form id="addNewGameForm" rendered="#{userContext.loggedUser.isAdmin}">
-                                <h:commandLink value="Add new game" action="#{gameEditor.showEditGameForm}"/>
+                                <ul class="nav">
+                                    <li>
+                                        <h:commandLink value="Add new game" action="#{gameEditor.showEditGameForm}" styleClass="nav"/>
+                                    </li>
+                                </ul>
                             </h:form>
                         </li>
                     </ul>
