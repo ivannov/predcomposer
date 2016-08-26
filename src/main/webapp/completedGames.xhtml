@@ -42,6 +42,12 @@
                                         <h:outputText
                                                 value="#{userPredictionsViewer.userPredictions[g.id].predictedResult}"/>
                                     </h:column>
+                                    <h:column rendered="#{userContext.loggedUser.isAdmin}">
+                                        <f:facet name="header">Actions</f:facet>
+                                        <h:form>
+                                            <h:commandLink value="Edit" action="#{gameEditor.showEditGameForm(g)}"/>
+                                        </h:form>
+                                    </h:column>
                                 </h:dataTable>
                             </div>
                         </div>
