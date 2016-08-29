@@ -47,12 +47,10 @@ public class LoginBean {
         User user = userManager.validateUser(userName, hashPassword(password));
         if (user != null) {
             userContext.setLoggedUser(user);
-            System.out.println("Going to home");
-            return "/home.faces";
+            return "/home.faces?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wrong user name or password", "Provide correct user name and password"));
-            System.out.println("wrong user name");
             return "/login.faces";
         }
     }

@@ -15,7 +15,6 @@ import java.time.Month;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 /**
  * @author Ivan St. Ivanov
@@ -203,7 +202,7 @@ public class EditGameBean implements Serializable {
         gamesService.storeGame(theGame, userContext.getSelectedCompetition());
         gameEvent.fire(theGame);
         conversation.end();
-        return "/futureGames";
+        return "/futureGames?faces-redirect=true";
     }
 
     private boolean empty(String... parameters) {
