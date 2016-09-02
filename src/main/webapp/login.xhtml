@@ -23,13 +23,13 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Welcome to prediction composer</h3>
                     </div>
-                    <h:messages/>
                     <div class="panel-body">
                         <h:form id="loginForm" role="form">
                             <fieldset>
-                                <div class="form-group">
+                                <h:panelGroup layout="block" class="#{not empty facesContext.messageList ? 'form-group has-error' : 'form-group'}">
+                                    <label class="control-label"><h:message for="userName"/></label>
                                     <h:inputText value="#{login.userName}" id="userName" class="form-control" a:placeholder="User name"/>
-                                </div>
+                                </h:panelGroup>
                                 <div class="form-group">
                                     <h:inputSecret value="#{login.password}" id="password" class="form-control" a:placeholder="Pasword"/>
                                 </div>

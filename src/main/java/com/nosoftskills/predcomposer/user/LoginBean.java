@@ -49,7 +49,7 @@ public class LoginBean {
             userContext.setLoggedUser(user);
             return "/home.faces?faces-redirect=true";
         } else {
-            FacesContext.getCurrentInstance().addMessage(null,
+            FacesContext.getCurrentInstance().addMessage("loginForm:userName",
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wrong user name or password", "Provide correct user name and password"));
             return "/login.faces";
         }
