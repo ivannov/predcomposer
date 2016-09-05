@@ -27,7 +27,7 @@
                         <h:form id="loginForm" role="form">
                             <fieldset>
                                 <h:panelGroup layout="block" class="#{not empty facesContext.messageList ? 'form-group has-error' : 'form-group'}">
-                                    <label class="control-label"><h:message for="userName"/></label>
+                                    <label id="loginErrorMessage" class="control-label"><h:message for="userName"/></label>
                                     <h:inputText value="#{login.userName}" id="userName" class="form-control" a:placeholder="User name"/>
                                 </h:panelGroup>
                                 <div class="form-group">

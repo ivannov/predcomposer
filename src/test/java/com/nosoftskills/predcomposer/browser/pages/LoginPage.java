@@ -22,7 +22,7 @@ public class LoginPage {
     @FindBy(id = "loginForm:login")
     private WebElement loginButton;
 
-    @FindBy(tagName = "li")
+    @FindBy(id = "loginErrorMessage")
     private WebElement facesMessage;
 
     public void login(String userName, String password) {
