@@ -1,6 +1,7 @@
 package com.nosoftskills.predcomposer.rest.resources;
 
 import com.nosoftskills.predcomposer.game.GamesService;
+import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.session.UserContext;
 
@@ -29,6 +30,9 @@ public class GameResource {
 
     @Inject
     private UserContext userContext;
+
+    @Inject
+    private Competition activeCompetition;
 
     @GET
     @Path("{id}")
@@ -61,7 +65,7 @@ public class GameResource {
             game.setResult(homeTeamScore + ":" + awayTeamScore);
         }
         game.setLocked(locked);
-        Game storedGame = gamesService.storeGame(game, userContext.getSelectedCompetition());
+        Game storedGame = gamesService.storeGame(game, activeCompetition);
         return Response.created(URI.create(GAME_RESOURCE_ROOT + "/" + storedGame.getId()))
                 .type(MediaType.APPLICATION_JSON_TYPE)
                 .entity(storedGame)

@@ -32,10 +32,12 @@ public class ViewGamesBean implements Serializable {
     @Inject
     private UserContext userContext;
 
+    @Inject
+    private Competition activeCompetition;
+
     @PostConstruct
     public void loadGames() {
-        Competition selectedCompetition = userContext.getSelectedCompetition();
-        selectedCompetition.getGames().forEach(game -> gamesMap.put(game.getId(), game));
+        activeCompetition.getGames().forEach(game -> gamesMap.put(game.getId(), game));
     }
 
     public List<Game> getFutureGames() {

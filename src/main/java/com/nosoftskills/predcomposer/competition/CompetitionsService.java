@@ -20,8 +20,18 @@ public class CompetitionsService implements Serializable {
     @PersistenceContext
     EntityManager entityManager;
 
+    private static Competition activeCompetition;
+
     public Competition findCompetitionById(Long competitionId) {
         return entityManager.find(Competition.class, competitionId);
+    }
+
+
+    public Competition findActiveCompetition() {
+        if (activeCompetition == null) {
+            activeCompetition = entityManager.createQuery("SELECT c FROM Competition c", Competition.class).getSingleResult();
+        }
+        return activeCompetition;
     }
 
     public Competition storeCompetition(Competition competition) {

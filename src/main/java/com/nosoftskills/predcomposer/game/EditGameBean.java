@@ -1,5 +1,6 @@
 package com.nosoftskills.predcomposer.game;
 
+import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.session.UserContext;
 
@@ -35,6 +36,9 @@ public class EditGameBean implements Serializable {
 
     @Inject
     private Conversation conversation;
+
+    @Inject
+    private Competition activeCompetition;
 
     public String getHomeTeam() {
         return theGame.getHomeTeam();
@@ -199,7 +203,7 @@ public class EditGameBean implements Serializable {
             theGame.setResult(homeTeamScore + ":" + awayTeamScore);
         }
 
-        gamesService.storeGame(theGame, userContext.getSelectedCompetition());
+        gamesService.storeGame(theGame, activeCompetition);
         gameEvent.fire(theGame);
         conversation.end();
         return "/futureGames?faces-redirect=true";

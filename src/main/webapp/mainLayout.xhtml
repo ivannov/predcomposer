@@ -42,19 +42,19 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <h:outputLink value="home.xhtml">Rankings</h:outputLink>
+                            <h:outputLink id="rankingsLink" value="home.xhtml">Rankings</h:outputLink>
                         </li>
                         <li>
-                            <h:outputLink value="futureGames.xhtml">Predict a match</h:outputLink>
+                            <h:outputLink id="futureGamesLink" value="futureGames.xhtml">Predict a match</h:outputLink>
                         </li>
                         <li>
-                            <h:outputLink value="completedGames.xhtml">Completed matches</h:outputLink>
+                            <h:outputLink id="completedGamesLing" value="completedGames.xhtml">Completed matches</h:outputLink>
                         </li>
                         <li>
                             <h:form id="addNewGameForm" rendered="#{userContext.loggedUser.isAdmin}">
                                 <ul class="nav">
                                     <li>
-                                        <h:commandLink value="Add new game" action="#{gameEditor.showEditGameForm}" styleClass="nav"/>
+                                        <h:commandLink id="addNewGameLink" value="Add new game" action="#{gameEditor.showEditGameForm}" styleClass="nav"/>
                                     </li>
                                 </ul>
                             </h:form>

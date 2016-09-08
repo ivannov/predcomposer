@@ -22,8 +22,8 @@ public class LoginPage {
     @FindBy(id = "loginForm:login")
     private WebElement loginButton;
 
-    @FindBy(id = "loginErrorMessage")
-    private WebElement facesMessage;
+    @FindBy
+    private WebElement loginErrorMessage;
 
     public void login(String userName, String password) {
         this.userName.sendKeys(userName);
@@ -32,7 +32,7 @@ public class LoginPage {
     }
 
     public void assertWrongCredentialsMessage() {
-        assertTrue(facesMessage.isDisplayed());
+        assertTrue(loginErrorMessage.isDisplayed());
     }
 
     public void assertIsLoaded() {

@@ -24,8 +24,7 @@ import static com.nosoftskills.predcomposer.user.PasswordHashUtil.hashPassword;
 @Startup
 public class TestDataInserter {
 
-    public static final String DEFAULT_COMPETITION_NAME = "Champions League 2015-2016";
-    public static Competition defaultCompetition = null;
+    private static final String DEFAULT_COMPETITION_NAME = "Champions League 2015-2016";
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -37,7 +36,7 @@ public class TestDataInserter {
         query.setParameter("competitionName", DEFAULT_COMPETITION_NAME);
 
         try {
-            defaultCompetition = query.getSingleResult();
+            query.getSingleResult();
             System.out.println("Data was already inserted");
             return;
         } catch (NoResultException nre) {
@@ -68,7 +67,7 @@ public class TestDataInserter {
         game2.getPredictions().addAll(Arrays.asList(prediction1, prediction2));
         game3.getPredictions().add(prediction3);
 
-        defaultCompetition = new Competition(DEFAULT_COMPETITION_NAME);
+        Competition defaultCompetition = new Competition(DEFAULT_COMPETITION_NAME);
         defaultCompetition.getGames().addAll(
                 Arrays.asList(game1, game2, game3, game4, game5, game6));
         entityManager.persist(defaultCompetition);

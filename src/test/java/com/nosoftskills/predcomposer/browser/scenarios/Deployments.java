@@ -1,12 +1,12 @@
 package com.nosoftskills.predcomposer.browser.scenarios;
 
+import com.nosoftskills.predcomposer.browser.fixtures.TestDataInserter;
 import com.nosoftskills.predcomposer.competition.CompetitionsService;
 import com.nosoftskills.predcomposer.game.GamesService;
 import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.prediction.PredictionsService;
 import com.nosoftskills.predcomposer.rankings.Score;
 import com.nosoftskills.predcomposer.session.UserContext;
-import com.nosoftskills.predcomposer.test.TestDataInserter;
 import com.nosoftskills.predcomposer.user.UsersService;
 import com.nosoftskills.predcomposer.web.LoggedUserFilter;
 import org.jboss.shrinkwrap.api.Filters;
