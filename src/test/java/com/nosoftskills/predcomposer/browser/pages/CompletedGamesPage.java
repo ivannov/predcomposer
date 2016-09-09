@@ -13,9 +13,13 @@
  */
 package com.nosoftskills.predcomposer.browser.pages;
 
+import com.nosoftskills.predcomposer.model.Game;
 import org.jboss.arquillian.graphene.page.Location;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -24,6 +28,10 @@ public class CompletedGamesPage {
 
     @FindBy
     private WebElement matchesTable;
+
+    public int getDisplayedMatchesNumber() {
+        return matchesTable.findElements(By.tagName("tr")).size() - 1; // the first tr is header
+    }
 
     public void assertIsLoaded() {
         assertTrue(this.matchesTable.isDisplayed());

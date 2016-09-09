@@ -27,7 +27,7 @@ import java.util.Arrays;
 
 @Singleton
 @Startup
-public class CompletedMatchesInserter {
+public class TestMatchesInserter {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -37,10 +37,12 @@ public class CompletedMatchesInserter {
         Competition competition = new Competition("Champions League");
 
         Game game1 = new Game("Milan", "Real Madrid", "5:0", LocalDateTime.now().minusDays(1), true);
-        Game game2 = new Game("Barcelona", "Manchester United", "3:1", LocalDateTime.now().minusDays(1), true);
-        Game game3 = new Game("CSKA", "Bayern Munchen", "4:3", LocalDateTime.now().minusDays(1), true);
+        Game game2 = new Game("Barcelona", "Manchester United", "3:1", LocalDateTime.now().minusDays(2), true);
+        Game game3 = new Game("CSKA", "Bayern Munchen", "4:3", LocalDateTime.now().minusDays(3), true);
+        Game game4 = new Game("Antwerp", "Levski", LocalDateTime.now().plusDays(2));
+        Game game5 = new Game("Roma", "Liverpool", LocalDateTime.now().plusDays(3));
 
-        competition.getGames().addAll(Arrays.asList(game1, game2, game3));
+        competition.getGames().addAll(Arrays.asList(game1, game2, game3, game4, game5));
 
         entityManager.persist(competition);
     }

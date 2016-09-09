@@ -13,7 +13,7 @@
  */
 package com.nosoftskills.predcomposer.browser.scenarios;
 
-import com.nosoftskills.predcomposer.browser.fixtures.CompletedMatchesInserter;
+import com.nosoftskills.predcomposer.browser.fixtures.TestMatchesInserter;
 import com.nosoftskills.predcomposer.browser.pages.CompletedGamesPage;
 import com.nosoftskills.predcomposer.browser.pages.HomePage;
 import com.nosoftskills.predcomposer.browser.pages.LoginPage;
@@ -31,6 +31,8 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import java.net.URL;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(Arquillian.class)
 @RunAsClient
@@ -50,7 +52,7 @@ public class CompletedMatchesScenarioTest {
 
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
-        return Deployments.createDeployment().addClass(CompletedMatchesInserter.class);
+        return Deployments.createDeployment().addClass(TestMatchesInserter.class);
     }
 
     @Before
@@ -63,5 +65,10 @@ public class CompletedMatchesScenarioTest {
     public void shouldLoadCompletedMatchesPageFromHomePage(@InitialPage HomePage homePage) throws Exception {
         homePage.showCompletedMatches();
         completedGamesPage.assertIsLoaded();
+    }
+
+    @Test
+    public void shouldDisplayCompletedMatchesInTable(@InitialPage CompletedGamesPage completedGamesPage) throws Exception {
+        assertEquals(3, completedGamesPage.getDisplayedMatchesNumber());
     }
 }
