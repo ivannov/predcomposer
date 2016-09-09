@@ -27,7 +27,7 @@ import static com.nosoftskills.predcomposer.user.PasswordHashUtil.hashPassword;
 
 @Singleton
 @Startup
-public class TestDataInserter {
+public class TestUsersInserter {
 
     @PersistenceContext
     private EntityManager entityManager;

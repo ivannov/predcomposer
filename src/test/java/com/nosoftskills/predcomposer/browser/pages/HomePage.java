@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static org.jboss.arquillian.graphene.Graphene.guardHttp;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -19,6 +20,13 @@ public class HomePage {
 
     @FindBy
     private WebElement addNewGameForm;
+
+    @FindBy
+    private WebElement completedGamesLink;
+
+    public void showCompletedMatches() {
+        guardHttp(completedGamesLink).click();
+    }
 
     public void assertGreetingMessage(String expectedUserName) {
         assertEquals("Hello, " + expectedUserName, greeting.getText());

@@ -1,6 +1,6 @@
 package com.nosoftskills.predcomposer.browser.scenarios;
 
-import com.nosoftskills.predcomposer.browser.fixtures.TestDataInserter;
+import com.nosoftskills.predcomposer.browser.fixtures.TestUsersInserter;
 import com.nosoftskills.predcomposer.competition.CompetitionsService;
 import com.nosoftskills.predcomposer.game.GamesService;
 import com.nosoftskills.predcomposer.model.Competition;
@@ -30,7 +30,7 @@ public class Deployments {
                 .addPackages(true, CompetitionsService.class.getPackage(),
                         GamesService.class.getPackage(), Competition.class.getPackage(),
                         PredictionsService.class.getPackage(), Score.class.getPackage(),
-                        UserContext.class.getPackage(), TestDataInserter.class.getPackage(),
+                        UserContext.class.getPackage(), TestUsersInserter.class.getPackage(),
                         UsersService.class.getPackage(), LoggedUserFilter.class.getPackage())
                 .addAsResource(new File("src/test/resources/META-INF/persistence-scenarios.xml"),
                         "META-INF/persistence.xml")
