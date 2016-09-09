@@ -23,11 +23,14 @@ import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.page.InitialPage;
 import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+
+import java.net.URL;
 
 @RunWith(Arquillian.class)
 @RunAsClient
@@ -35,6 +38,12 @@ public class CompletedMatchesScenarioTest {
 
     @Drone
     private WebDriver browser;
+
+    @ArquillianResource
+    private URL deploymentUrl;
+
+    @Page
+    private LoginPage loginPage;
 
     @Page
     private CompletedGamesPage completedGamesPage;
@@ -45,7 +54,8 @@ public class CompletedMatchesScenarioTest {
     }
 
     @Before
-    public void login(@InitialPage LoginPage loginPage) {
+    public void login() {
+        browser.get(deploymentUrl.toExternalForm() + "login.jsf");
         loginPage.login("ivan", "ivan");
     }
 
