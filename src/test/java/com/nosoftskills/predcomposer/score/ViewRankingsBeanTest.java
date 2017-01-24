@@ -25,14 +25,10 @@ import static org.junit.Assert.assertEquals;
 public class ViewRankingsBeanTest {
 
     @Inject
-    private ContextController contextController;
-
-    @Inject
     private ViewRankingsBean bean;
 
     @Test
     public void shouldLoadRankings() throws Exception {
-        bean.loadUserScores();
         assertEquals(2, bean.getUserScores().size());
         assertEquals(3, bean.getUserScores().get(0).getPoints().intValue());
         assertEquals(TestData.user2, bean.getUserScores().get(0).getUser());
