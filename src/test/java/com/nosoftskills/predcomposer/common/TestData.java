@@ -5,7 +5,6 @@ import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.model.Prediction;
 import com.nosoftskills.predcomposer.model.User;
 
-import javax.persistence.Entity;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.Arrays;

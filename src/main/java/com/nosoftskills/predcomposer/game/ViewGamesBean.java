@@ -52,6 +52,7 @@ public class ViewGamesBean implements Serializable {
         return gamesMap.values()
                 .stream()
                 .filter(gamePredicate)
+                .sorted(Comparator.comparing(Game::getGameTime))
                 .collect(Collectors.toList());
     }
 

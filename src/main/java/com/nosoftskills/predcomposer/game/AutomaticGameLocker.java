@@ -23,7 +23,7 @@ public class AutomaticGameLocker {
     @Inject
     private Event<Game> gameEvent;
 
-    @Schedule(hour = "*", minute = "10,25,40,55")
+    @Schedule(hour = "*", minute = "10/15", persistent = false)
     public void lockRecentGames() {
         final LocalDateTime now = LocalDateTime.now();
         final LocalDateTime fiveMinutesLater = now.plusMinutes(5);
