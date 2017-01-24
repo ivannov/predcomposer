@@ -64,7 +64,7 @@ public class PredictionsServiceIntegrationTest {
     @Test
     @InSequence(1)
     public void shouldCreatePrediction() throws Exception {
-        Competition testCompetition = new Competition("Champions League 2015/2016",
+        Competition testCompetition = new Competition("Champions League 2016/2017",
                 "Ils sont les meilleurs");
         competitionsService.storeCompetition(testCompetition);
 
@@ -72,7 +72,7 @@ public class PredictionsServiceIntegrationTest {
         usersService.storeUser(testUser);
 
         Game testGame = new Game("Manchester City", "Juventus",
-                LocalDateTime.of(2015, 9, 15, 21, 45));
+                LocalDateTime.of(2016, 9, 15, 21, 45));
         gamesService.storeGame(testGame, testCompetition);
 
         testPrediction = new Prediction(testUser, testGame, "2:2");

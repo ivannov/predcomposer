@@ -58,10 +58,10 @@ public class GamesServiceIntegrationTest {
     @Test
     @InSequence(1)
     public void shouldCreateGame() throws Exception {
-        testCompetition = new Competition("Champions League 2015/2016", "Ils sont les meilleurs");
+        testCompetition = new Competition("Champions League 2016/2017", "Ils sont les meilleurs");
         competitionsService.storeCompetition(testCompetition);
 
-        testGame = new Game("Manchester City", "Juventus", LocalDateTime.of(2015, 9, 15, 21, 45));
+        testGame = new Game("Manchester City", "Juventus", LocalDateTime.of(2016, 9, 15, 21, 45));
         Game storedGame = gamesService.storeGame(testGame, testCompetition);
 
         assertNotNull(storedGame.getId());

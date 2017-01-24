@@ -46,8 +46,8 @@ public class CompetitionsServiceIntegrationTest {
     @Test
     @InSequence(1)
     public void shouldCreateCompetition() throws Exception {
-        testCompetition = new Competition("Premiership 2015/2016", "English Premier League");
-        testGame = new Game("Manchester City", "Juventus", LocalDateTime.of(2015, 9, 15, 21, 45));
+        testCompetition = new Competition("Champions League 2016/2017", "These are the champions");
+        testGame = new Game("Manchester City", "Juventus", LocalDateTime.of(2016, 9, 15, 21, 45));
         testCompetition.getGames().add(testGame);
         Competition persistedCompetition = competitionsService.storeCompetition(testCompetition);
         assertNotNull(persistedCompetition.getId());
