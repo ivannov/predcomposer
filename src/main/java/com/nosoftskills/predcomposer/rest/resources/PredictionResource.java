@@ -25,11 +25,10 @@ import java.util.Set;
 /**
  * @author Ivan St. Ivanov
  */
-@RequestScoped
 @Path(PredictionResource.PREDICTION_RESOURCE_ROOT)
 public class PredictionResource {
 
-    public static final String PREDICTION_RESOURCE_ROOT = "/prediction";
+    static final String PREDICTION_RESOURCE_ROOT = "/prediction";
 
     @Inject
     private PredictionsService predictionsService;

@@ -20,7 +20,7 @@ import java.net.URI;
 @Path(CompetitionResource.COMPETITION_RESOURCE_ROOT)
 public class CompetitionResource {
 
-    public static final String COMPETITION_RESOURCE_ROOT = "/competition";
+    static final String COMPETITION_RESOURCE_ROOT = "/competition";
 
     @Inject
     private CompetitionsService competitionsService;

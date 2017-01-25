@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 @Path(GameResource.GAME_RESOURCE_ROOT)
 public class GameResource {
 
-    public static final String GAME_RESOURCE_ROOT = "/game";
+    static final String GAME_RESOURCE_ROOT = "/game";
 
     @Inject
     private GamesService gamesService;
