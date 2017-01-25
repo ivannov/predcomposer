@@ -1,5 +1,6 @@
 package com.nosoftskills.predcomposer.game;
 
+import com.nosoftskills.predcomposer.competition.Active;
 import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.session.UserContext;
@@ -32,7 +33,7 @@ public class ViewGamesBean implements Serializable {
     @Inject
     private UserContext userContext;
 
-    @Inject
+    @Inject @Active
     private Competition activeCompetition;
 
     @PostConstruct

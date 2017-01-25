@@ -1,5 +1,6 @@
 package com.nosoftskills.predcomposer.game;
 
+import com.nosoftskills.predcomposer.competition.Active;
 import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.session.UserContext;
@@ -37,7 +38,7 @@ public class EditGameBean implements Serializable {
     @Inject
     private Conversation conversation;
 
-    @Inject
+    @Inject @Active
     private Competition activeCompetition;
 
     public String getHomeTeam() {

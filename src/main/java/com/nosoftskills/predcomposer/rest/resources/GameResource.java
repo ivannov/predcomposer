@@ -1,5 +1,6 @@
 package com.nosoftskills.predcomposer.rest.resources;
 
+import com.nosoftskills.predcomposer.competition.Active;
 import com.nosoftskills.predcomposer.game.GamesService;
 import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
@@ -31,7 +32,7 @@ public class GameResource {
     @Inject
     private UserContext userContext;
 
-    @Inject
+    @Inject @Active
     private Competition activeCompetition;
 
     @GET

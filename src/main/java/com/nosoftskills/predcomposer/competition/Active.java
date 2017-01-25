@@ -15,23 +15,14 @@
  */
 package com.nosoftskills.predcomposer.competition;
 
-import com.nosoftskills.predcomposer.model.Competition;
+import javax.inject.Qualifier;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-
-@ApplicationScoped
-public class ActiveCompetitionProducer {
-
-    @Inject
-    private CompetitionsService competitionsService;
-
-    @RequestScoped
-    @Produces @Active
-    public Competition getActiveCompetition() {
-        return competitionsService.findActiveCompetition();
-    }
-
+@Qualifier
+@Retention(RUNTIME)
+@Target({METHOD, FIELD, PARAMETER, TYPE})
+public @interface Active {
 }
