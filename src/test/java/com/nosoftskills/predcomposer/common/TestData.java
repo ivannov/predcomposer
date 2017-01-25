@@ -32,6 +32,8 @@ public final class TestData {
 
     static {
         initialize();
+        currentId = 1;
+        Stream.of(TestData.class.getFields()).forEach(TestData::setId);
     }
 
     static void initialize() {
@@ -62,11 +64,6 @@ public final class TestData {
     }
 
     private static long currentId;
-
-    public static void generateEntityIds() {
-        currentId = 1;
-        Stream.of(TestData.class.getFields()).forEach(TestData::setId);
-    }
 
     private static void setId(Field field) {
         try {

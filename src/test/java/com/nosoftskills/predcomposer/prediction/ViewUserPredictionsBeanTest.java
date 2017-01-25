@@ -6,18 +6,14 @@ import com.nosoftskills.predcomposer.model.Prediction;
 import org.jglue.cdiunit.ActivatedAlternatives;
 import org.jglue.cdiunit.CdiRunner;
 import org.jglue.cdiunit.ContextController;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
-
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
-import static com.nosoftskills.predcomposer.common.TestData.generateEntityIds;
 
 
 /**
@@ -34,11 +30,6 @@ public class ViewUserPredictionsBeanTest {
 
     @Inject
     private ViewUserPredictionsBean bean;
-
-    @BeforeClass
-    public static void generateIds() {
-        generateEntityIds();
-    }
 
     @Test
     public void shouldLoadUserPredictionsUponStartup() throws Exception {
