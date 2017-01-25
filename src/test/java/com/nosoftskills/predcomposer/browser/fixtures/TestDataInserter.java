@@ -15,6 +15,8 @@
  */
 package com.nosoftskills.predcomposer.browser.fixtures;
 
+import com.nosoftskills.predcomposer.competition.CompetitionsService;
+import com.nosoftskills.predcomposer.model.Competition;
 import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.model.User;
 
@@ -27,6 +29,7 @@ import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 import static com.nosoftskills.predcomposer.user.PasswordHashUtil.hashPassword;
 
@@ -44,12 +47,13 @@ public class TestDataInserter {
 
         LocalDate tomorrow = LocalDate.now().plusDays(1);
         LocalDateTime gameTime = LocalDateTime.of(tomorrow, LocalTime.of(21, 45));
+        Competition competition = new Competition(CompetitionsService.DEFAULT_COMPETITION_NAME);
         Game game1 = new Game("Barcelona", "Bayern Munchen", gameTime);
         Game game2 = new Game("Juventus", "Chelsea", gameTime);
+        competition.getGames().addAll(Arrays.asList(game1, game2));
         entityManager.persist(user1);
         entityManager.persist(user2);
-        entityManager.persist(game1);
-        entityManager.persist(game2);
+        entityManager.persist(competition);
     }
 
 }
