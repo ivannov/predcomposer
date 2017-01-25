@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Ivan St. Ivanov
  */
-@Location("login.jsf")
+@Location("login.xhtml")
 public class LoginPage {
 
     @FindBy(id = "loginForm:userName")

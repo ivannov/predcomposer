@@ -15,6 +15,7 @@
  */
 package com.nosoftskills.predcomposer.browser.fixtures;
 
+import com.nosoftskills.predcomposer.model.Game;
 import com.nosoftskills.predcomposer.model.User;
 
 import javax.annotation.PostConstruct;
@@ -22,6 +23,10 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static com.nosoftskills.predcomposer.user.PasswordHashUtil.hashPassword;
 
@@ -36,8 +41,15 @@ public class TestDataInserter {
     public void insertTestData() {
         User user1 = new User("ivan", hashPassword("ivan"), "ivan@example.com", "Ivan", "Ivanov", true);
         User user2 = new User("koko", hashPassword("koko"), "koko@example.com", "Koko", "Stefanov", false);
+
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+        LocalDateTime gameTime = LocalDateTime.of(tomorrow, LocalTime.of(21, 45));
+        Game game1 = new Game("Barcelona", "Bayern Munchen", gameTime);
+        Game game2 = new Game("Juventus", "Chelsea", gameTime);
         entityManager.persist(user1);
         entityManager.persist(user2);
+        entityManager.persist(game1);
+        entityManager.persist(game2);
     }
 
 }

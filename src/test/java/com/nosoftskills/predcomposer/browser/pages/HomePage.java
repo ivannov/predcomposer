@@ -11,7 +11,7 @@ import static org.junit.Assert.fail;
 /**
  * @author Ivan St. Ivanov
  */
-@Location("home.jsf")
+@Location("home.xhtml")
 public class HomePage {
 
     @FindBy
