@@ -4,7 +4,7 @@ import com.nosoftskills.predcomposer.alternatives.PredictionsServiceAlternative;
 import com.nosoftskills.predcomposer.alternatives.UserContextAlternative;
 import org.jglue.cdiunit.ActivatedAlternatives;
 import org.jglue.cdiunit.CdiRunner;
-import org.jglue.cdiunit.ContextController;
+import org.jglue.cdiunit.InRequestScope;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,19 +24,14 @@ import static org.junit.Assert.assertEquals;
 public class ViewGamePredictionsBeanTest {
 
     @Inject
-    private ContextController contextController;
-
-    @Inject
     private ViewGamePredictionsBean bean;
 
     @Test
+    @InRequestScope
     public void shouldLoadGamePredictionsUponRequest() throws Exception {
-        contextController.openRequest();
         bean.showGamePredictions(game2);
         assertEquals(game2, bean.getGame());
         assertEquals(2, bean.getPredictions().size());
-        contextController.closeRequest();
-        contextController.closeSession();
     }
 
 }
