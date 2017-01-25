@@ -5,7 +5,7 @@ import com.nosoftskills.predcomposer.alternatives.UserContextAlternative;
 import com.nosoftskills.predcomposer.model.Prediction;
 import org.jglue.cdiunit.ActivatedAlternatives;
 import org.jglue.cdiunit.CdiRunner;
-import org.jglue.cdiunit.ContextController;
+import org.jglue.cdiunit.InRequestScope;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,18 +26,13 @@ import static org.junit.Assert.assertNotNull;
 public class ViewUserPredictionsBeanTest {
 
     @Inject
-    private ContextController contextController;
-
-    @Inject
     private ViewUserPredictionsBean bean;
 
     @Test
+    @InRequestScope
     public void shouldLoadUserPredictionsUponStartup() throws Exception {
-        contextController.openRequest();
         Map<Long, Prediction> userPredictions = bean.getUserPredictions();
         assertNotNull(userPredictions);
         assertEquals(2, userPredictions.size());
-        contextController.closeRequest();
-        contextController.closeSession();
     }
 }
