@@ -15,6 +15,14 @@ public class UsersService {
 
     @PersistenceContext
     private EntityManager entityManager;
+    
+    public UsersService() {
+    	// no init needed
+    }
+    
+    public UsersService(EntityManager entityManager) {
+    	this.entityManager = entityManager;
+    }
 
     public List<User> getAllUsers() {
         return entityManager.createNamedQuery("getAllUsers", User.class).getResultList();
